@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="template/master.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:panelGrid columns="2">
+
+                        <h:outputText value="Parmission Name :" />
+                        <p:inputText value="#{userNameBean.permission.permission_name}" />
+
+                        <h:outputText value="Description :" />
+                        <p:inputTextarea value="#{userNameBean.permission.description}" rows="6" cols="33" />
+
+                        <p:commandButton action="#{userNameBean.addPermission()}" value="Save" />
+                        <p:commandButton action="#{userNameBean.homePage()}" value="Back" />
+
+                    </p:panelGrid>  
+                    <p:panelGrid columns="2">       
+
+
+                        <p:dataTable var="poption" value="#{nameBeanPermission.permissionTypeList}">
+                            <p:column>
+                                <p:selectBooleanCheckbox value=""/>
+
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{poption.permission_option}" />  
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2">
+
+                        <p:dataTable var="permission" value="#{userNameBean.listPermission()}">
+
+                            <p:column>
+                                <f:facet name="header">Permission Name</f:facet>
+                                    #{permission.permission_name}
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">Description</f:facet>
+                                    #{permission.description}
+                            </p:column>
+                        </p:dataTable>
+
+
+                    </p:panelGrid>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>

@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+    <h:head>
+        <title>Facelet Title</title>
+
+    </h:head>
+    <h:body>
+
+
+        <ui:composition template="template/master.xhtml">
+
+            <ui:define name="content">
+               
+                <h3 style="margin:0px 0 20px 0;padding: 0px;">Payment</h3>
+                <h:form id="paymentForm" style="margin:40px 0 0 100px ">
+                    <p> 
+                        <h:outputLabel for="pamentType" value="Select a payment Method :" style="margin: 0px;padding: 0px;"  /> 
+                        <p:selectOneRadio id="pamentType" value="#{pmb.pmt.method}" required="true"  requiredMessage="Select a method"  >
+                            <f:selectItem itemLabel="Card" itemValue="card"  />
+                            <f:selectItem itemLabel="Cash" itemValue="cash" />
+                          
+                        </p:selectOneRadio >
+                        <h:message  for="pamentType" style="color:red" />
+                    </p>
+                    <p>
+                        <h:outputLabel for="cardType" value="Select a Card :" id="card_label" style="margin: 0px;padding: 0px;" />
+                        <p:selectOneRadio id="cardType" value="#{pmb.cardType}"  requiredMessage="Select a card">
+                            <f:selectItem itemLabel="Visa" itemValue="visa" />
+                            <f:selectItem itemLabel="Master" itemValue="master" />
+                            <f:selectItem itemLabel="AmricanExpress" itemValue="americanexpress" />
+                            <p:ajax event="change"  />
+                        </p:selectOneRadio>
+                       
+                    </p>
+                    <p> 
+                        <h:outputLabel for="cardNumber" value="Give your card number :"  id="card_no_label" /> 
+                        <p:inputText id="cardNumber" value="#{pmb.card_number}" requiredMessage="Please give a card number" style="margin-left:1px;">
+                            <p:ajax event="blur"  />
+                        </p:inputText>
+
+                        <h:message  for="cardNumber" style="color:red" />
+
+                    </p>
+                    <p> 
+                        <h:outputLabel for="cardholder" value="Give card holder name:"  id="card_holder_label" /> 
+                        <p:inputText id="cardholder" value="#{pmb.card_holder}" requiredMessage="Please give a card holdername" style="margin-left:9px;">
+                            <p:ajax event="blur" /> 
+                            <f:validateRegex pattern="^[a-zA-Z\\s]*$" />
+                        </p:inputText>
+
+                        <h:message  for="cardholder" style="color:red" />
+                    </p>
+                    <p> 
+                        <h:outputLabel for="cardexpiry" value="Give card expiry :"  id="card_expiray_label"  /> 
+                        <p:inputMask id="cardexpiry" value="#{pmb.card_expiray}" requiredMessage="Please give a card expiray" mask="99/99" placeholder="MM/YY" style="margin-left:46px;" >
+                            <p:ajax event="blur"/>
+                        </p:inputMask>
+
+                        <h:message  for="cardexpiry" style="color:red" />
+                    </p>
+                    <p> 
+                        <h:outputLabel for="cvc" value="Give card cvc :"  id="card_cvc_label" /> 
+                        <p:inputText id="cvc"  value="#{pmb.cvc}" requiredMessage="Please give a card cvc"  style="margin-left:64px;" >
+                            <p:ajax event="blur" update="growl " listener="#{pmb.cardValidation}" />
+                            <f:validateRegex pattern="\d{3}" />
+                        </p:inputText>
+                        <p:growl id="growl" showDetail="true" sticky="true" />  
+                        <h:message  for="cvc" style="color:red" />
+
+                    </p>
+                    <p>
+                        <h:outputLabel for="amount" value="Amount :" />
+                        <p:inputText id="amount" value="#{autoCompleteView.totalAmount}" required="true"  requiredMessage="Amount Required" style="margin-left:103px;" binding="#{pmb.totalAmountUI}" >
+                            <f:validateDoubleRange minimum="1.00"/>
+                        </p:inputText>
+                        <h:message  for="amount" style="color:red" />
+                    </p>
+                    <p>
+                        <h:outputLabel for="comment" value="Comments :" />
+                        <p:inputTextarea id="comment" value="#{pmb.pm.comments}" style="margin-left:100px;" />
+                    </p>
+                    <h:inputHidden value="#{autoCompleteView.order.id}" binding="#{pmb.orderIdUI}"/>
+                    <p><h:commandButton  value="CheckOut" action="#{pmb.makePayment}" class="btn btn-primary" style="margin: 20px 0 15px 281px;" /></p>
+                    <f:metadata>
+                        <f:viewParam name="totalAmount" value="#{autoCompleteView.totalAmount}"/>
+                        <f:viewParam name="id" value="#{autoCompleteView.order.id}"/>
+                        
+                    </f:metadata>
+                   
+                </h:form>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+
+    </h:body>
+</html>
+

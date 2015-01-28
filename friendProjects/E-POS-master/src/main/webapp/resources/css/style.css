@@ -1,0 +1,23 @@
+*{
+	padding:0px;
+	margin:0px;
+}
+body{
+    
+    background-image:  url("#{resource['images/bg.png']}") !important;
+    background-repeat: repeat !important;
+}
+.container{padding:0px;margin:0px auto;width:1000px;}
+    .header{padding:10px  0 0 0;margin:0px;height:60px;background-color:#0099FF;opacity: 0.4;}
+.header .logout{width:70px;padding:0px;margin:0px 10px 0 0;float:right;}
+.header .logo{font-style: italic;color:#000000; }
+
+.container .content{padding:10px 0 0 0;margin:0px 0 10px 0;min-height:500px; }
+.content .sidebar{padding:0px;margin:0px;width:131px}
+.sidebar ul li{list-style:none;padding:0px 0 10px 0;}
+.sidebar .side_abr_link{width:120px;}
+.sidebar .btn {width:120px;}
+.content .mainconttent{padding:10px 0 0 20px ;margin:0px;background-color:#F8F8F8;min-height: 500px;opacity: 0.8;width:868px !important;}
+.container .footer{margin:0px;padding:10px 0 0 10px;height:40px;background-color:#0099FF;opacity: 0.4;}
+
+/*payment input css**/

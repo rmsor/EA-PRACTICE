@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+
+        <p:fieldset legend="Add Doctor" toggleable="true" toggleSpeed="500">
+            <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:panel id="pnl" header="New Doctor" style="margin-bottom:10px;">
+                        <!--<p:messages id="messages" />-->
+
+                        <h:panelGrid columns="3" cellpadding="5">
+
+
+                            <h:outputLabel for="userName" value="User Name: " />
+                            <p:inputText id="userName" value="#{manageDoctorBean.selectedoctor.userName}" required="true" > </p:inputText>
+                            <p:message for="firstname" />
+
+                            <h:outputLabel for="password" value="Initial Password :" />
+                            <p:inputText id="password" value="#{manageDoctorBean.selectedoctor.userPassword}" required="true" />
+                            <p:message for="lastname" />
+
+                            <h:outputLabel for="firstname" value="Firstname: " />
+                            <p:inputText id="firstname" value="#{manageDoctorBean.selectedoctor.firstName}" required="true" label="Firstname">
+                                <f:validateLength minimum="2" />
+                            </p:inputText>
+                            <p:message for="firstname" />
+
+                            <h:outputLabel for="lastname" value="Lastname: " />
+                            <p:inputText id="lastname" value="#{manageDoctorBean.selectedoctor.lastName}" required="true" label="Lastname"/>
+                            <p:message for="lastname" />
+                            <p:outputLabel for="gender" value="Gender:" />
+                            <p:selectOneRadio id="gender" value="#{manageDoctorBean.selectedoctor.gender}">
+                                <f:selectItem itemLabel="Female" itemValue="Female" />
+                                <f:selectItem itemLabel="Male" itemValue="Male" />
+                            </p:selectOneRadio>
+
+                            <p:message for="gender" id="genderError"/>
+                            <p:outputLabel value="Date ofBirth" />
+                            <p:calendar id="dateofBirth"  value="#{manageDoctorBean.selectedoctor.dateofBirth}" required="true">
+                                <p:ajax event="change" update="DOBMsg"/>
+                            </p:calendar>
+                            <p:message for="dateofBirth" id="DOBMsg"/>
+
+
+                            <h:outputLabel for="cellphonenumber" value="Cell Phone Number: " />
+                            <p:inputText id="cellphonenumber" value="#{manageDoctorBean.selectedoctor.cellPhoneNo}" required="true" label="Cell Phone Number"/>
+                            <p:message for="cellphonenumber" />
+
+                            <h:outputLabel for="homephonenumber" value="Home Phone Number: " />
+                            <p:inputText id="homephonenumber" value="#{manageDoctorBean.selectedoctor.homePhoneNo}" required="true" label="Home Phone Number"/>
+                            <p:message for="homephonenumber" />
+
+                            <h:outputLabel for="workphonenumber" value="Work Phone Number: " />
+                            <p:inputText id="workphonenumber" value="#{manageDoctorBean.selectedoctor.workPhoneNo}" required="true" label="Work Phone Number"/>
+                            <p:message for="workphonenumber" />
+
+                        </h:panelGrid>
+
+
+                        <p:commandButton id="saveBtn" value="Save" icon="ui-icon-check" style="margin:0" action="#{manageDoctorBean.addDoctor}"/>
+                    </p:panel>  
+                </h:panelGrid>
+            </h:form>
+        </p:fieldset>
+
+
+
+        <p:fieldset legend="View or Edit Doctor" toggleable="true" toggleSpeed="500">
+            <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:dataTable id="basicDT" var="doctor" value="#{manageDoctorBean.doctorList}">
+                    <f:facet name="header">
+                        Doctors Details
+                    </f:facet>
+                    <p:column headerText="Id">
+                        <h:outputText value="#{doctor.id}" />
+                    </p:column>
+                    <p:column headerText="First Name">
+                        <h:outputText value="#{doctor.firstName}" />
+                    </p:column>
+                    <p:column headerText="Last Name">
+                        <h:outputText value="#{doctor.lastName}" />
+                    </p:column>
+                    <p:column headerText="Date of Birth">
+                        <h:outputText value="#{doctor.dateofBirth}" />
+                    </p:column>
+                    <p:column headerText="Cellphone Number">
+                        <h:outputText value="#{doctor.cellPhoneNo}" />
+                    </p:column>
+                    <p:column headerText="Home Phone Number ">
+                        <h:outputText value="#{doctor.homePhoneNo}" />
+                    </p:column>
+                    <p:column headerText="Work Phone Number">
+                        <h:outputText value="#{doctor.workPhoneNo}" />
+                    </p:column>    
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":doctorDetail" oncomplete="PF('doctorOP').show('#{component.clientId}')" icon="ui-icon-search" title="Edit">
+                            <f:setPropertyActionListener value="#{doctor}" target="#{manageDoctorBean.selectedoctor}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+
+                <p:overlayPanel widgetVar="doctorOP" showEffect="fade" hideEffect="fade" dismissable="false" showCloseIcon="true">
+                    <p:outputPanel id="doctorDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty manageDoctorBean.selectedoctor}" columnClasses="label,value">
+                            <f:facet name="header">
+                                Doctor Information
+                            </f:facet>
+
+                            <h:outputLabel for="firstName" value="First Name:" />
+                            <p:inplace id="firstName" editor="true">
+                                <p:ajax event="save" listener="#{manageDoctorBean.updateDoctor}" update="firstName" />
+                                <p:inputText value="#{manageDoctorBean.selectedoctor.firstName}" required="true" label="text" />
+                            </p:inplace>
+
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:overlayPanel>
+
+            </h:panelGrid>
+        </p:fieldset>
+
+
+
+
+
+    </h:body>
+</html>
+

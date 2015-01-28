@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="template/master.xhtml">
+
+            <ui:define name="content">
+                
+                <h:form style="margin-top: 25px;">
+                    <h:outputLabel for="from">From:</h:outputLabel> 
+                    <p:calendar id="from" value="#{chartView.fromDate}" pattern="yyyy-MM-dd">
+                        <p:ajax event="dateSelect"/>
+                    </p:calendar>
+
+                    <h:outputLabel for="to">To:</h:outputLabel> 
+                    <p:calendar id="to" value="#{chartView.toDate}" pattern="yyyy-MM-dd">
+                        <p:ajax event="dateSelect"/>
+                    </p:calendar><br/><br/>
+                    <p:commandButton value="Generate Report" class="btn btn-primary" >
+                        <f:ajax event="click" listener="#{chartView.generateModel}" render="myChart" />
+                    </p:commandButton>
+                    <p:commandButton value="Export Report" class="btn btn-primary">
+                        <f:ajax event="click" listener="#{chartView.exportReport}" render="sucess" />
+                    </p:commandButton>
+                    <p:growl id="sucess" showDetail="true" sticky="true" />  
+                </h:form>
+
+                <h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
+                    <p:pieChart id="myChart" value="#{chartView.model}" legendPosition="w" />
+                </h:panelGrid>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

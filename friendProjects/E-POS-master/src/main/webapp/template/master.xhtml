@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Online Pos</title>
+
+    </h:head>
+    <h:body>
+
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+       
+
+        <div class="container">
+            <div class="row header ">
+                <ui:insert name="header" >
+                    <ui:include src="/template/header.xhtml" />
+                </ui:insert>
+            </div>
+            <div class="row content">
+                <div class="col-xs-2 sidebar" >
+                    <ui:insert name="sidebar" >
+                        <ui:include src="/template/sidebar.xhtml" />
+                    </ui:insert>
+                </div>
+                <div class="col-xs-10 mainconttent ">
+                    <ui:insert name="content" >
+                        <ui:include src="/template/content.xhtml" />
+                    </ui:insert>
+
+                </div>
+            </div>
+            <div class="row footer">
+                <ui:insert name="footer" >
+                    <ui:include src="/template/footer.xhtml" />
+                </ui:insert>
+            </div>
+        </div>
+        <h:outputScript library="js" name="jquery-1.11.1.min.js" />
+        <script>
+            $.noConflict();
+// Code that uses other library's $ can follow here.
+        </script>
+        <h:outputScript library="js" name="payment.js" />
+        
+    </h:body>
+</html>
+
+

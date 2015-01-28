@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Online POS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/master.xhtml">
+
+            <ui:define name="content">
+               
+                <h2>Supplier</h2>
+                <f:view>
+                    <h:form id="form">
+                        <p:panelGrid columns="2">
+                            <f:facet name="header">
+                                Add Supplier
+                            </f:facet>
+                            <h:outputLabel value="Supplier Name: "/><h:inputText value="#{supplierMB.supplier.supplier_name}"/>
+                            <h:outputLabel value="Address: "/><h:inputText value="#{supplierMB.supplier.address}"/>
+                            <h:outputLabel value="Contact1: "/><h:inputText value="#{supplierMB.supplier.contact1}"/>
+                            <h:outputLabel value="Contact2: "/><h:inputText value="#{supplierMB.supplier.contact2}"/>
+                            <h:outputLabel value="Email: "/><h:inputText value="#{supplierMB.supplier.email}"/>
+                            <f:facet name="footer">
+                                <h:commandButton action="#{supplierMB.addSupplier}" value="Save"/>
+                            </f:facet>
+                        </p:panelGrid>
+                        <br /><h:link outcome="index" value="Back to Home" />
+                    </h:form>
+                    <hr />
+                    <h:dataTable var="supps" value="#{supplierMB.suppliers}">
+                        <h:column headerClass="columnHeader">
+                            <f:facet name="header">SUPPLIER NAME&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                                #{supps.supplier_name}
+                        </h:column>
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">ADDRESS&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                                #{supps.address}
+                        </h:column>
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">CONTACT-1&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                                #{supps.contact1}
+                        </h:column>
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">CONTACT-2&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                                #{supps.contact2}
+                        </h:column>
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">EMAIL ADDRESS</f:facet>
+                                #{supps.email}
+                        </h:column>
+                    </h:dataTable>
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

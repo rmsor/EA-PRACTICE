@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>My GeekAnswers Dashboard </title>
+    </h:head>
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            My GeekAnswers Dashboard
+        </ui:define>
+        <ui:define name="body">
+  <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+<!--            <h:inputSecret value="#{userController.isUserLoggedIn()}" id="user_id"/>-->
+        <p:panelGrid columns="4" styleClass="dashboard-panel" style="width: 90%;border-color: white">
+                <p:column colspan="3">
+                    <p:panel id="basic" styleClass="dashboard-panel box" header="#{userController.loggedInUser().firstName} #{userController.loggedInUser().lastName}" style="margin-bottom: 10px">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:graphicImage library="images" name="avatar.gif" height="100" width="140"  />
+                            <p:column>
+                                <h:outputText styleClass="dash-title" value="#{userController.loggedInUser().firstName} #{userController.loggedInUser().lastName}" /><br/>
+                                <h:outputLabel value="Member since " />
+                                <h:outputText value="  #{userController.loggedInUser().registerDate}" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText><br/>
+                                <h:outputLabel value="Email:" />
+                                <h:outputText value="  #{userController.loggedInUser().email}"/><br/>
+                                <h:outputLabel value="Points:" />
+                                <h:outputText value="  #{userController.loggedInUser().totalPoint}"/><br/>
+                                <h:outputLabel value="Level:" />
+                                <h:outputText value="  #{userController.loggedInUser().userlevel.title}"/><br/>
+                                <br/>
+                                <h:outputLabel value="Expertise:" />
+
+
+                                <c:forEach items="#{userController.expertiseList}" var="elist">
+                                    <br/>  <p:commandButton value="#{elist.category.title}" />
+
+
+                                </c:forEach>
+                                <h:outputLabel rendered="#{userController.expertiseList.size()==0}">
+                                    Nothing exists, Start answering questions
+                                </h:outputLabel>
+                                <br/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <h:link outcome="/question/List.xhtml" value="View my Questions(#{userController.loggedInUser().questions.size()})"/>
+                            </f:facet>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:column>
+                <c:if test="#{userController.isAdministrator(userController.loggedInUser())}">
+                    <p:column>
+                        <p:panel header="Administrative Action" styleClass="dashboard-panel box" >
+                            <h:link outcome="/answer/List.xhtml" value="Show All Answer "/><br/>
+                            <h:link outcome="/category/List.xhtml" value="Show All Category "/><br/>
+                            <h:link outcome="/comment/List.xhtml" value="Show All Comment "/><br/>
+                            <h:link outcome="/question/questions.xhtml" value="Show All Question "/><br/>
+                            <h:link outcome="/reputation/List.xhtml" value="Show All Reputation "/><br/>
+                            <h:link outcome="/tag/List.xhtml" value="Show All Tag "/><br/>
+                            <h:link outcome="/user/List.xhtml" value="Show All User "/><br/>
+                            <h:link outcome="/question/questions.xhtml" value="Question" /><br/>
+                        </p:panel>
+                    </p:column>
+                </c:if>
+            </p:panelGrid>
+            <c:if test="#{userController.isAdministrator(userController.loggedInUser())}">
+                <p:panel header="Site Statatistics" styleClass="dash-panel">
+                    <p:panelGrid columns="2">
+                        <h:outputLabel>
+                            Users
+                        </h:outputLabel>
+                        <h:outputLabel>
+                            #{userController.countTotalUsers()}
+                        </h:outputLabel>
+                        <h:outputLabel>
+                            Categories
+                        </h:outputLabel>
+                        <h:outputLabel>
+                            #{userController.countTotalCourses()}
+                        </h:outputLabel>
+                        <h:outputLabel>
+                            Questions
+                        </h:outputLabel>
+                        <h:outputLabel>
+                            #{userController.countTotalQuestions()}
+                        </h:outputLabel>
+                        <f:facet name="footer">
+                            <h:link outcome="/category/Create.xhtml" value="Create Category"/>
+                        </f:facet>
+                    </p:panelGrid>
+                </p:panel>
+
+            </c:if>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

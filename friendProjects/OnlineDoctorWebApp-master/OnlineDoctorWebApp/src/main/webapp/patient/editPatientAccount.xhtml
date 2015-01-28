@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>#{msgs.title}</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="content"> 
+                <div class="signupdiv">
+                <h:form  id="editPatientInfo">
+                    <p:fieldset legend="Personal Information" toggleable="true" toggleSpeed="500">
+                        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
+                        <h:panelGrid columns="3" cellpadding="9">
+                            <p:commandLink value="Change my password" action="changePassword"/> 
+                            <p:commandLink value="Edit my address" action="editAddress"/>
+                            <br/>
+
+                            <p:outputLabel value="#{msgs.firstName}"/>
+
+                            <p:inplace id="basic">
+                                <p:inputText id="first" value="#{editPatientBean.patient.firstName}" 
+                                             requiredMessage="first name is required" required="true">
+                                    <f:ajax event="blur" render="firstError"/>
+                                </p:inputText>
+                            </p:inplace>
+                            <h:message for="first" id="firstError" style="color: red"/>
+                            <p:outputLabel value="#{msgs.lastName}"/>
+                            <p:inplace>
+                                <p:inputText id="last" value="#{editPatientBean.patient.lastName}">
+                                    <f:ajax event="blur" render="lastError"/>
+                                </p:inputText>
+                            </p:inplace>
+                            <p:message for="last"  id="lastError" style="color: red"/>
+
+                            <p:outputLabel  for="dateOfBirth" value="#{msgs.dateOfBirth}" />
+                            <p:inplace>
+                                <p:calendar id="dateOfBirth" value="#{editPatientBean.patient.dateofBirth}"
+                                            required="true"  pattern="mm/dd/yyyy"            
+                                            validator="#{editPatientBean.validateDateofBirth}"
+                                            requiredMessage="Date of birth  required">
+                                    <p:ajax event="change" update="errorDateOfBirth"/>
+                                </p:calendar>
+                            </p:inplace>
+                            <p:message for="dateOfBirth"  id="errorDateOfBirth" style="color: red"/>
+                            <p:outputLabel value="#{msgs.phoneNoHome}"/>
+                            <p:inplace >
+                                <p:inputMask id="homePhoneNo" value="#{editPatientBean.patient.homePhoneNo}" mask="(999) 999-9999"/>
+                            </p:inplace >
+                            <h:message for="homePhoneNo" style="color: red"/>
+                            <p:outputLabel value="#{msgs.phoneNoCell}" />
+                            <p:inplace>
+                                <p:inputMask id="cellPhoneNo" value="#{editPatientBean.patient.cellPhoneNo}" mask="(999) 999-9999"/>
+                            </p:inplace>
+                            <h:message for="cellPhoneNo" style="color: red"/>
+                            <p:outputLabel value="#{msgs.phoneNoWork}"/>
+                            <p:inplace>
+                                <p:inputMask id="workPhoneNo" value="#{editPatientBean.patient.workPhoneNo}" mask="(999) 999-9999"/>
+                            </p:inplace>
+                            <h:message for="workPhoneNo" style="color: red"/>
+                            <p:outputLabel value="#{msgs.username} "/>
+                            <p:inplace>
+                                <p:inputText id="username" value="#{editPatientBean.patient.credential.userName}">
+                                </p:inputText>
+                            </p:inplace>
+                            <p:message for="username" id="userNameError" style="color: red"/>
+                            <p:outputLabel value="#{msgs.email}"/>
+                            <p:inplace>
+                                <p:inputText id="email" value="#{editPatientBean.patient.email}" validatorMessage="#{editPatientBean.patient.email} is not valid" >
+                                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                                    <f:ajax event="blur" render="emailError"/>
+                                </p:inputText>
+                            </p:inplace>
+                            <p:message for="email" id="emailError" style="color: red"/>
+                            <p:commandButton value="#{msgs.btnSave}" action="#{editPatientBean.updateAccount()}"/>
+                            <p:commandButton value="Cancel" immediate="true"/>
+                            <h:commandButton value="clickMe" action="#{editPatientBean.clickMe}"/>
+                        </h:panelGrid>
+                    </p:fieldset>
+                </h:form>
+                <h:form>
+                    <p:fieldset legend="Address" toggleable="true" toggleSpeed="500">
+                        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
+                        <h:panelGrid columns="3" cellpadding="9">
+                            <p:outputLabel for="Street" value="Street:" /> 
+                            <p:inplace>
+                                <p:inputText id="Street" value="#{editPatientBean.patient.address.street}"/>
+                            </p:inplace>
+                            <p:message for="Street" />
+                            <p:outputLabel for="city" value="City:"/>
+                            <p:inplace>
+                                <p:inputText id="city" value="#{editPatientBean.patient.address.city}"/>
+                            </p:inplace>
+                            <p:message for="city" />
+
+                            <p:outputLabel for="state" value="State:" />
+                            <p:inplace>
+                                <p:inputText id="state" value="#{editPatientBean.patient.address.state}"/>
+                            </p:inplace>
+                            <p:message for="state" />
+
+                            <p:outputLabel for="zipCode" value="Zip Code:" />
+                            <p:inplace>
+                                <p:inputText id="zipCode" value="#{editPatientBean.patient.address.zipCode}"/>
+                            </p:inplace>
+                            <p:message for="zipCode" />
+
+                            <p:outputLabel for="country" value="Country :" />
+                            <p:inplace>
+                                <p:inputText id="country" placeholder=" " value="#{editPatientBean.patient.address.country}"/>
+                            </p:inplace>
+                            <p:message for="country" />
+                            <p:commandButton value="Save" action="#{editPatientBean.updatePatient()}"/>
+                            <p:commandButton value="Cancel" immediate="true"/>
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                </h:form>
+
+                <h:form>
+                    <p:fieldset legend="Change Password" toggleable="true" toggleSpeed="500">
+                        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
+                        <h:panelGrid columns="3" cellpadding="9">
+                            <p:outputLabel value="Current Password: "/>
+                            <p:password id="password" value="#{editPatientBean.currentPassword}" required="true" >
+                            </p:password>
+                            <p:message for="password" style="color: red"/>
+                            <p:outputLabel value="New Password"  />
+                            <p:password id="newPassword" value="#{editPatientBean.newPassword}" match="confirmPassword" required="true">
+                            </p:password>
+                            <p:message for="newPassword" style="color: red"/>
+                            <p:outputLabel value="Confirm Password" />
+                            <p:password id="confirmPassword" value="#{editPatientBean.newPasswordConfirm}" required="true">
+                            </p:password>
+                            <h:message for="confirmPassword" style="color: red"/>
+                            <p:commandButton value="Change Password" action="#{editPatientBean.changePassword()}"/>
+                            <p:commandButton value="Cancel" immediate="true"/>
+                        </h:panelGrid>
+                    </p:fieldset>
+                </h:form>
+                    
+                    
+                </div>
+            </ui:define>
+
+
+        </ui:composition>
+    </h:body>
+</html>

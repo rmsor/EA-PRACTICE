@@ -1,0 +1,208 @@
+#header{
+    height:120px;
+    background-color: #DFE2DB;
+    font-size: 50px;
+    text-align: center;
+    color: #191919;
+}
+.ui-layout-resizer, .ui-layout-resizer-north, ui-layout-resizer-open, .ui-layout-resizer-north-open 
+{
+    display: none;
+}
+.ui-layout-unit {
+padding: 0.2em 0em;
+border: 0px none;
+overflow: auto;
+/* color: #fff; */
+left:auto;
+}
+#menu{
+    text-align: center;
+}
+#askquestion{
+    text-align: right;
+}
+.txtborder{
+    padding: 10px;
+    border-color: red;
+}
+#wrap{
+    width: 90%;
+}
+#footer{
+    height:30px;
+    background-color: #626266;
+    font-size: 13px;
+    text-align: center;
+    color: #191919;
+    padding-top: 5px;
+}
+.questionTitle{
+    font-size: 18px;
+    color: #558C89;
+    font-family: "Calibri";
+}
+.dash-title{
+    font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 52.7999992370606px;
+}
+.dash-content{
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.3999996185303px;
+}
+table{
+  border: transparent;
+      width: 90%
+
+}
+table th{
+    text-align: center;
+    background: #16A085;
+    color: #fff;
+   
+}
+table tr{
+}
+.ui-panel-content ui-widget-content{
+}
+table td{
+  
+    border: transparent;
+    border-color: background;
+
+    
+}
+
+
+table td a{
+    display: inline-block;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+background-image: none;
+}
+.ui-layout-resizer, .ui-layout-resizer-north, ui-layout-resizer-open, .ui-layout-resizer-north-open {
+display: none;
+background: #f3f3f3;
+}
+.ui-widget-content {
+border: transparent;
+background: #f3f3f3;
+/* color: #E8E0E0; */
+}
+.ui-panel .ui-panel-titlebar {
+background-color: #3E3E3E;
+color: white;
+}
+.ui-panel .ui-panel-content {
+border: 0;
+background: #DFE4E6;
+padding: 0.5em 1em;
+/* word-wrap: break-word; */
+}
+form.jsfcrud_list_form th, td th {
+/* font-size: x-small; */
+/* color: #DFE2DB; */
+border-top-style: solid;
+border-bottom-style: solid;
+border-left-style: solid;
+border-right-style: solid;
+border-top-width: 1px;
+/* border-bottom-width: 10px; */
+border-left-width: 1px;
+border-right-width: 1px;
+border-top-color: #b2d5d6;
+border-bottom-color: #b2d5d6;
+border-left-color: #90b4bd;
+border-right-color: #90b4bd;
+letter-spacing: 3px;
+text-align: left;
+padding-top: 6px;
+padding-bottom: 6px;
+padding-left: 6px;
+padding-right: 6px;
+/* background-color: #424348; */
+}
+.commandbutton-width{
+    width: 100px;
+}
+.voting_panel{
+    width: 10%;
+}
+.question-panel{
+    width: 80%;
+}
+.ui-panel-footer ui-widget-content{
+    text-align: right;
+}
+.ui-icon.fa {
+     text-indent:0px;
+     background-image:none;
+}
+.panel-footer {
+padding: 10px 15px;
+background-color: #f5f5f5;
+border-top: 1px solid #ddd;
+border-bottom-right-radius: 3px;
+border-bottom-left-radius: 3px;
+font-size: small;
+}
+.main-header{
+    size:100px;
+}
+.dash-panel {
+    /* font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif; */
+    width: 90%;
+   alignment-baseline: central;
+   
+    border-top: 20px;
+}
+.ui-panel-content ui-widget-content{
+    background: red;
+}
+.ui-menu.ui-widget {
+min-width: 220px;
+/* padding: 5px 0; */
+background-color: #ffffff;
+border: 1px solid #ccc;
+border: 1px solid rgba(0, 0, 0, 0.2);
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 6px;
+-webkit-background-clip: padding-box;
+-moz-background-clip: padding;
+background-clip: padding-box;
+}
+.ui-tabs .ui-tabs-panel {
+border-width: 0;
+padding-left: 0;
+padding-top: 0;
+background: none;
+border-bottom-width: 0;
+/* padding-right: 20px; */
+}
+
+.question{
+    width: 90%;
+}
+.answer{
+    width: 90%;
+}

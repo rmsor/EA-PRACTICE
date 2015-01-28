@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/WebService/CardValidator_Visa?wsdl" uri="wsdl/localhost_8080/WebService/CardValidator_Visa.wsdl"/>
+    <system systemId="http://localhost:8080/WebService/CardValidator_Visa?xsd=1" uri="wsdl/localhost_8080/WebService/CardValidator_Visa.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebService/Cardvalidation_ms?wsdl" uri="wsdl/localhost_8080/WebService/Cardvalidation_ms.wsdl"/>
+    <system systemId="http://localhost:8080/WebService/Cardvalidation_ms?xsd=1" uri="wsdl/localhost_8080/WebService/Cardvalidation_ms.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebService/Cardvalidator_am?wsdl" uri="wsdl/localhost_8080/WebService/Cardvalidator_am.wsdl"/>
+    <system systemId="http://localhost:8080/WebService/Cardvalidator_am?xsd=1" uri="wsdl/localhost_8080/WebService/Cardvalidator_am.xsd_1.xsd"/>
+</catalog>

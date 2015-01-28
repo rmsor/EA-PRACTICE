@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Online POS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/master.xhtml">
+
+            <ui:define name="content">
+                <h2>Product</h2>
+                <f:view>
+                    <h:form id="form" enctype="multipart/form-data">
+                        <p:panelGrid columns="2">
+                            <f:facet name="header">
+                                Add Product
+                            </f:facet>
+                            <h:outputLabel value="Product Name: "/><h:inputText value="#{productMB.product.product_name}"/>
+                            <h:outputLabel value="Description: "/><h:inputText value="#{productMB.product.product_desc}"/>
+                            <h:outputLabel value="Unit Price: "/><h:inputText value="#{productMB.product.supplier_unit_price}"/>
+                            <h:outputLabel value="Quantity: "/><h:inputText value="#{productMB.product.quantity}"/>
+                            <h:outputLabel value="Image: "/><p:fileUpload value="#{productMB.uploadedFile}" mode="simple" />
+                            <h:outputLabel value="Select Supplier: "/><h:selectOneMenu value="#{productMB.supID}">
+                                <f:selectItems value="#{supplierMB.suppliers}" 
+                                               var ="sup" itemValue="#{sup.id}"
+                                               itemLabel="#{sup.supplier_name}" />
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Select Category: "/><h:selectOneMenu value="#{productMB.catID}">
+                                <f:selectItems value="#{categoryMB.categories}" 
+                                               var ="cat" itemValue="#{cat.id}"
+                                               itemLabel="#{cat.category_name}" />
+                            </h:selectOneMenu>
+                            <f:facet name="footer">
+                                <h:commandButton action="#{productMB.addProduct}" value="Save"/>
+                            </f:facet>
+                        </p:panelGrid>
+                        <br /><h:link outcome="index" value="Back to Home" />
+                    </h:form>
+                    <hr />
+                    <h:form enctype="multipart/form-data">
+                        <h:outputLabel value="Batch File: "/><p:fileUpload value="#{productMB.uploadedBatchFile}" mode="simple" />
+                        <h:commandButton value="Upload" action="#{productMB.uploadBatchFileAction}"/>
+                    </h:form>
+                    <hr />
+                    <h:dataTable var="prods" value="#{productMB.products}">
+                        <h:column headerClass="columnHeader">
+                            <f:facet name="header">PRODUCT NAME&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                                #{prods.product_name}
+                        </h:column>
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">DESCRIPTION&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                                #{prods.product_desc}
+                        </h:column>
+                        <h:column headerClass="columnHeader">
+                            <f:facet name="header">UNIT PRICE&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                                #{prods.supplier_unit_price}
+                        </h:column>
+                        <h:column headerClass="columnHeader">
+                            <f:facet name="header">QUANTITY&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                                #{prods.quantity}
+                        </h:column>
+                        <h:column headerClass="columnHeader">
+                            <f:facet name="header">PRODUCT IMAGE&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                            <h:graphicImage value="resources/images/product_images/#{prods.product_image}" style="height: 111px; width:111px;"/>
+                        </h:column>
+
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">CATEGORY</f:facet>
+                                #{prods.category.category_name}
+                        </h:column>
+                    </h:dataTable>
+                    <br /><br />
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Online POS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/master.xhtml">
+
+            <ui:define name="content">
+                <h2>Category</h2>
+                <f:view>
+                    <h:form id="form">
+                        <p:panelGrid columns="2">
+                            <f:facet name="header">
+                                Add Category
+                            </f:facet>
+                            <h:outputLabel value="Category Name: "/><h:inputText value="#{categoryMB.category.category_name}"/>
+                            <h:outputLabel value="Category Description: "/><h:inputText value="#{categoryMB.category.description}"/>
+                            <h:outputLabel value="Select Tax: "/><h:selectOneMenu value="#{categoryMB.taxID}">
+                                <f:selectItems value="#{taxMB.taxes}" 
+                                               var ="tax" itemValue="#{tax.id}"
+                                               itemLabel="#{tax.tax_name}" />
+                            </h:selectOneMenu>
+                            <f:facet name="footer">
+                                <h:commandButton action="#{categoryMB.addCategory}" value="Save"/>
+                            </f:facet>
+                        </p:panelGrid>
+                        <br /><h:link outcome="index" value="Back to Home" />
+                    </h:form>
+                    <hr />
+                    <h:dataTable var="cats" value="#{categoryMB.categories}">
+                       <h:column headerClass="columnHeader">
+                           <f:facet name="header">NAME&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                           #{cats.category_name}
+                       </h:column>
+                       <h:column headerClass="columnHeader" >
+                           <f:facet name="header">DESCRIPTION&nbsp;&nbsp;|&nbsp;&nbsp;</f:facet>
+                           #{cats.description}
+                       </h:column>
+                        <h:column headerClass="columnHeader" >
+                           <f:facet name="header">ASSIGNED TAX</f:facet>
+                           #{cats.tax.tax_name}
+                       </h:column>
+                   </h:dataTable>
+                </f:view>
+            </ui:define>
+            
+        </ui:composition>
+
+    </h:body>
+</html>

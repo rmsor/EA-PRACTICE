@@ -1,0 +1,10 @@
+/build/*
+/dist/*
+/setup/*
+/test/*
+/src/conf/*
+/nbproject/*
+/build.xml
+/nbproject/project.properties
+/nbproject/private/*
+/src/conf/persistence.xml
