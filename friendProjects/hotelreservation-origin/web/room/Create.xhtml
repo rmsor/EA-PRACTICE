@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRoomTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{roomController.selected.id}" title="#{bundle.CreateRoomTitle_id}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_hotel}" for="hotel" />
+                    <h:selectOneMenu id="hotel" value="#{roomController.selected.hotel}" title="#{bundle.CreateRoomTitle_hotel}" >
+                        <f:selectItems value="#{hotelController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_type}" for="type" />
+                    <h:inputText id="type" value="#{roomController.selected.type}" title="#{bundle.CreateRoomTitle_type}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_smoking}" for="smoking" />
+                    <h:inputText id="smoking" value="#{roomController.selected.smoking}" title="#{bundle.CreateRoomTitle_smoking}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_price}" for="price" />
+                    <h:inputText id="price" value="#{roomController.selected.price}" title="#{bundle.CreateRoomTitle_price}" />
+                    <h:outputLabel value="Photo" for="photo" />
+                    <p:fileUpload fileUploadListener="#{roomController.upload}" mode="advanced" dragDropSupport="true"
+                            multiple="true" update="messages" sizeLimit="1000000" fileLimit="10" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:growl id="messages" showDetail="true" />
+                </h:panelGrid>
+                <br/>
+                <p:dataTable value="#{featureRoomController.items}" var="feature" tableStyle="width:auto"
+                             selection="#{roomController.features}"  rowKey='#{feature}'>
+                   <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_feature_type}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.feature_type}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_discription}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.discription}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.id}"/>
+                        </p:column>
+                    
+                    <p:column selectionMode="multiple" style="width:2%" />
+                </p:dataTable>
+                <br />
+                <h:commandLink action="#{roomController.create}" value="#{bundle.CreateRoomSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{roomController.prepareList}" value="#{bundle.CreateRoomShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRoomIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

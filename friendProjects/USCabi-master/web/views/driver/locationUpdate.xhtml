@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Car</title>
+    </h:head>
+    <script src="//js.maxmind.com/js/geoip.js" type="text/javascript" ></script>
+
+
+    <h:body>
+        
+        Country Code: <script language="JavaScript">document.write(geoip_country_code());</script><br/>
+        Country Name: <script language="JavaScript">document.write(geoip_country_name());</script><br/>
+        City: <script language="JavaScript">document.write(geoip_city());</script><br/>
+        Region: <script language="JavaScript">document.write(geoip_region());</script><br/>
+        Region Name: <script language="JavaScript">document.write(geoip_region_name());</script><br/>
+        Latitude: <script language="JavaScript">document.write(geoip_latitude());</script><br/>
+        Longitude: <script language="JavaScript">document.write(geoip_longitude());</script><br/>
+
+        <h:form id="form">Message:
+            <h:inputText id="status" value="#{driverService.statusLocation.message}" /><br/>
+            <p:outputLabel for="driverStatus" value="Driver Status:" />
+            <h:selectOneMenu id="driverStatus" value="#{driverService.statusLocation.driverStatus}" required="true" label="Driver Status">
+                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="AVAILABLE" itemValue="AVAILABLE" />
+                <f:selectItem itemLabel="BOOKED" itemValue="BOOKED" />
+            </h:selectOneMenu>
+            <p:message for="driverStatus" />
+
+            <h:inputHidden id="countryCode" value="#{driverService.statusLocation.countryCode}" />
+            <h:inputHidden id="countryName" value="#{driverService.statusLocation.countryName}" />
+            <h:inputHidden id="latitude" value="#{driverService.statusLocation.latitude}" />
+            <h:inputHidden id="longitude" value="#{driverService.statusLocation.longitude}" />
+            <h:inputHidden id="region" value="#{driverService.statusLocation.region}" />
+            <h:inputHidden id="regionName" value="#{driverService.statusLocation.regionName}" />          
+            <h:inputHidden id="city" value="#{driverService.statusLocation.city}" />  
+            <h:commandButton value="Update Status and Location" action="#{driverService.doLocationUpdate}" /> 
+            
+        </h:form>
+
+
+    </h:body>
+    <script language="JavaScript">
+        document.getElementById('form:countryCode').value = geoip_country_code();
+        document.getElementById('form:countryName').value = geoip_country_name();
+        document.getElementById('form:city').value = geoip_city();
+        document.getElementById('form:region').value = geoip_region();
+        document.getElementById('form:regionName').value = geoip_region_name();
+        document.getElementById('form:latitude').value = geoip_latitude();
+        document.getElementById('form:longitude').value = geoip_longitude();
+    </script>
+
+</html>
+

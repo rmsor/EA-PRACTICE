@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+    
+    
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">            
+            <c:if test="#{param['id'] != null}">
+                <f:event type="preRenderView" listener="#{doctorBean.editDoctor(param['id'])}" />
+            </c:if>
+     
+           
+           <div id="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span8">
+   
+                                <h2>Doctor</h2>
+                                
+                                <c:if test="#{message != null}">
+                                    <p class="alert alert-success">#{message}</p>
+                                </c:if>
+                                
+                                
+                                <h:form>
+                                
+                                <h:messages class="errors"/>
+                                
+                                <c:if test="#{param['id'] == null}">
+                                    
+                                <p>
+                                <h:outputLabel value="Department:"/>
+                                    <h:selectOneMenu value="#{doctorBean.doctor.department}">
+                                        <f:selectItems value="#{departmentBean.listAllDepartments()}" var="department" itemValue="#{department}" itemLabel="#{department.departmentName}"/>
+                                    <f:converter converterId="departmentConverter"/>
+                                </h:selectOneMenu>
+                                    
+                                </p>
+                                
+                                
+                                <p>
+                                    <h:outputLabel value="Email:"/>
+                                    <h:inputText id="email" required="true" validatorMessage="Invalid email address." label="Email" class="input-xxlarge" rendered="true" value="#{doctorBean.doctor.user.email}">
+                                        <f:validateRegex pattern="^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$"/>
+                                    </h:inputText> 
+                                    <h:message class="error" for="email"/>
+                                </p>
+                                
+                                <p>
+                                    <h:outputLabel value="Username:"/>
+                                    <h:inputText id="username" required="true" validatorMessage="User Name Not Valid" class="input-xxlarge" label="User Name:" rendered="true" value="#{doctorBean.doctor.user.username}">
+                                        <f:validateLength minimum="4" maximum="10" />
+                                        <f:validator validatorId="userValidator"/>
+                                    </h:inputText>
+                                    <h:message class="error" for="username"/>
+                                </p>
+                                
+                                <hr/>
+                                
+                                </c:if>
+                                
+                                <h3>Doctor Info</h3>
+                                <p>
+                                    
+                                    <h:outputLabel value="First Name:"/>
+                                    <h:inputText class="input-xxlarge" label="First Name" id="firstName" required="true" rendered="true" value="#{doctorBean.doctor.firstName}"/><br/>
+                                    <h:message class="error" for="firstName"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="Last Name:"/>
+                                    <h:inputText class="input-xxlarge" label="Last Name" id="lastName" required="true" rendered="true" value="#{doctorBean.doctor.lastName}"/><br/>
+                                    <h:message class="error" for="lastName"/>
+                                </p>
+                                <hr/>
+                                <p>
+                                    <h:outputLabel value="Phone:"/>
+                                    <h:inputText class="input-xxlarge" label="Phone" id="phone" value="#{doctorBean.doctor.phone}"/>
+                                    <h:message class="error" for="phone"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="Mobile:"/>
+                                    <h:inputText class="input-xxlarge" label="Mobile" id="mobile" value="#{doctorBean.doctor.mobile}"/>
+                                    <h:message class="error" for="mobile"/>
+                                </p>
+                                <hr/>
+                                <h3>Address:</h3>
+                                <p>
+                                    <h:outputLabel value="Street:"/>
+                                    <h:inputText class="input-xxlarge" label="Street" id="street" value="#{doctorBean.doctor.street}"/>
+                                    <h:message class="error" for="street"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="City:"/>
+                                    <h:inputText class="input-xxlarge" label="City" id="city" value="#{doctorBean.doctor.city}"/>
+                                    <h:message class="error" for="city"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="State:"/>
+                                    <h:inputText class="input-xxlarge" label="State" id="state" value="#{doctorBean.doctor.stateName}"/>
+                                    <h:message class="error" for="state"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="Zip:"/>
+                                    <h:inputText class="input-xxlarge" label="Zip" id="zip" value="#{doctorBean.doctor.zipCode}"/>
+                                    <h:message class="error" for="zip"/>
+                                </p>
+                                
+                                
+                                <h:inputHidden value="#{doctorBean.doctor.id}"/>
+                                
+<!--                                <h:selectOneMenu value="{doctorBean.selectedValue}">
+                                    <f:selectItem itemLabel="Nepal" itemValue="1"/>
+                                    <f:selectItem itemLabel="China" itemValue="2"/>
+                                </h:selectOneMenu>-->
+                                
+                                
+                                
+                                
+                                <p>
+                                    
+                             
+                                    <h:commandButton class="btn btn-primary" action="#{doctorBean.createDoctor()}" value="Submit"/>
+                                </p>
+                            </h:form>  
+                                
+                                
+                                
+                            </div>
+                            <div class="span4">
+
+                                
+
+
+
+                            </div>	
+                        </div>	
+                        
+                    </div>	
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+        </ui:define>
+    </ui:composition>        
+ 
+</html>  

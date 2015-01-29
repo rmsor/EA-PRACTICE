@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="animate.css"/>
+        <h:outputStylesheet library="css" name="loginstyles.css"/>
+        <h:outputStylesheet library="css" name="reset.css"/>
+    </h:head>   
+    <h:body>
+        <div id="container">
+            <h:form>
+                <div style="padding:10px;">
+                    
+                    <p style="padding-left:25px; color: red; text-align: center;">
+                        <h:outputText value="#{loginManaged.errorMessage}" />
+                    </p>
+                    
+                     <div style="clear: both"></div>
+                    <label for="name"  style="padding-left:20px;">Username:</label>
+                    <h:inputText value="#{loginManaged.username}" /> 
+                    <div style="clear: both"></div>
+
+                    <label for="username"  style="padding-left:20px;">Password:</label>
+
+                    <h:inputSecret value="#{loginManaged.password}" />
+
+                    <div id="lower">
+                        <h:commandButton value="Login" action="#{loginManaged.checkLogin()}"/>
+
+                    </div>
+                </div>
+            </h:form>
+
+        </div>
+    </h:body>
+</html>
+

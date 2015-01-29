@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"        
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition>
+
+            <h1>USCabi</h1>
+
+            <h:form style="float: right" id="login-form">
+                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+                <h:panelGrid columns="7" cellpadding="5">
+                    <h:outputLabel for="username" value="Username:" />
+                    <p:inputText id="username" value="#{loginService.username}" required="true" label="username" />
+                                        <p:message for="username" />
+
+
+                    <h:outputLabel for="password" value="Password:" />
+                    <p:password id="password" value="#{loginService.password}" required="true" label="password" />
+                                        <p:message for="password" />
+
+
+                    <p:commandButton value="Login" update="growl" action="#{loginService.doLogin}"/>
+
+                </h:panelGrid>
+
+
+
+            </h:form>
+
+
+
+        </ui:composition>
+    </body>
+</html>
+
+

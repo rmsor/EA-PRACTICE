@@ -1,0 +1,85 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 12, 2014, 4:26:55 PM
+    Author     : uurtsaikh
+*/
+
+.hotel_list {
+    padding: 5px;
+    position: relative;
+}
+
+.hotel_image {
+    float: left;
+    width: 40%;
+}
+
+.hotel_info {
+    float: right;
+    width: 60%;
+    height: 100%;
+}
+
+.clear-both {
+   clear: both;
+}
+
+#hotel_name {
+    font-size: 30px;
+    color:#4BC6F8;
+}
+
+.hotel_info_location {
+    
+}
+
+.hotel_info_review {
+    position: absolute;
+    bottom: 0;
+    color: gray;
+}
+
+.hotel_info_book_button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.hotel_info_book_button {
+    padding-right: 10px;
+}
+
+.hotel_info_address {
+    font-style: italic;
+    color: gray;
+}
+
+.room_list td, th{
+    border: 1px solid gray;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.room_list thead {
+    background-color: #DEDEDE;
+    border: 1px solid gray;
+}
+
+#j_idt85 > input {
+        color: red;
+        font-size: 16px;
+        height: 40px;
+        width: 120px;
+    }
+    #hoteRate{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+#reveStarImg{
+     margin-top: 0px;
+    margin-bottom: 0px;
+}

@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+    
+    
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">            
+            <c:if test="#{param['id'] != null}">
+                <f:event type="preRenderView" listener="#{departmentBean.editDepartment(param['id'])}" />
+            </c:if>
+     
+           
+           <div id="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span8">
+   
+                                <h2>Department</h2>
+                                
+                                <c:if test="#{message != null}">
+                                    <p class="alert alert-success">#{message}</p>
+                                </c:if>
+                                
+                                
+                                <h:form>
+                                
+                                <h:messages class="errors"/>
+                                
+                                <h:inputHidden value="#{departmentBean.department.id}"/>
+                                
+                                <h3>Department Info</h3>
+                                <p>
+                                    
+                                    <h:outputLabel value="Department Name:"/>
+                                    <h:inputText class="input-xxlarge" label="First Name" id="departmentName" required="true" rendered="true" value="#{departmentBean.department.departmentName}"/><br/>
+                                    <h:message class="error" for="departmentName"/>
+                                </p>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <p>
+                                    <h:commandButton class="btn btn-primary" action="#{departmentBean.createDepartment()}" value="Submit"/>
+                                </p>
+                            </h:form>  
+                                
+                                
+                                
+                            </div>
+                            <div class="span4">
+
+                                
+
+
+
+                            </div>	
+                        </div>	
+                        
+                    </div>	
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+        </ui:define>
+    </ui:composition>        
+ 
+</html>  

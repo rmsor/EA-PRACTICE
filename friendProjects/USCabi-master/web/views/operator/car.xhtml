@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Car</title>
+    </h:head>
+    <h:body>
+
+        <h:form id="form">
+            <p:panel id="panel">
+                <h3 style="background-color: #f5f5f5; padding: 5px 0px 8px 2px; margin-top: 0px;">Add Car</h3>
+
+                <p:messages id="messages" />
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="text1" value="MOT Certificate No:" />
+                    <p:inputText id="text1" value="#{operatorService.car.motCertificateNo}" required="true" label="Firstname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="text1" />
+
+                    <p:outputLabel for="mask1" value="MOT Expiration Date:" />
+                    <p:calendar id="mask1" value="#{operatorService.car.motExpirationDate}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="mask1" />
+
+
+                    <p:outputLabel for="mask2" value="Road Tax Expire Date:" />
+                    <p:calendar id="mask2" value="#{operatorService.car.roadTaxExpireDate}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="mask2" />
+
+
+                    <p:outputLabel for="text4" value="Car Insurer:" />
+                    <p:inputText id="text4" value="#{operatorService.car.carInsurer}" required="true" label="Surname"/>
+                    <p:message for="text4" />
+
+
+                    <p:outputLabel for="mask3" value="Car Insurer Renewal Date:" />
+                    <p:calendar id="mask3" value="#{operatorService.car.carInsurerRenewalDate}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="mask3" />
+
+
+                    <p:outputLabel for="text6" value="Public Liability Insurer:" />
+                    <p:inputText id="text6" value="#{operatorService.car.publicLiabilityInsurer}" required="true" label="Surname"/>
+                    <p:message for="text6" />
+
+
+                    <p:outputLabel for="text7" value="Car Number:" />
+                    <p:inputText id="text7" value="#{operatorService.car.carNumber}" required="true" label="Surname"/>
+                    <p:message for="text7" />
+
+
+                    <p:outputLabel for="text8" value="Car Manufacturer" />
+                    <p:inputText id="text8" value="#{operatorService.car.carMake}" required="true" label="Surname"/>
+                    <p:message for="text8" />
+
+
+                    <p:outputLabel for="text9" value="Car Model:" />
+                    <p:inputText id="text9" value="#{operatorService.car.carModel}" required="true" label="Surname"/>
+                    <p:message for="text9" />
+
+
+                    <p:outputLabel for="text10" value="Licensed Seat:" />
+                    <p:inputText id="text10" value="#{operatorService.car.licensedSeat}" required="true" label="Surname"/>
+                    <p:message for="text10" />
+
+                    <p:outputLabel for="text11" value="Car Color:" />
+                    <p:inputText id="text11" value="#{operatorService.car.carColor}" required="true" label="Surname"/>
+                    <p:message for="text11" />
+
+                    <p:outputLabel for="text12" value="Car Registration No:" />
+                    <p:inputText id="text12" value="#{operatorService.car.carLicenseNo}" required="true" label="Surname"/>
+                    <p:message for="text12" />
+
+                    <p:outputLabel for="mask4" value="Car Registratiopn Renewal Date:" />
+                    <p:calendar id="mask4" value="#{operatorService.car.carLinenseRenewalDate}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="mask4" />
+
+
+                    <p:outputLabel for="text14" value="Price:" />
+                    <p:inputText id="text14" value="#{operatorService.car.price}" required="true" label="Surname"/>
+                    <p:message for="text14" />
+                    
+                    
+                    <p:outputLabel for="cartype" value="Car Type:" />
+                    <h:selectOneMenu id="cartype" value="#{operatorService.car.carType}" required="true" label="Car Type">
+                        <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="SUV" itemValue="SUV" />
+                        <f:selectItem itemLabel="TAXICAB" itemValue="TAXICAB" />
+                        <f:selectItem itemLabel="MINICAB" itemValue="MINICAB" />
+
+                    </h:selectOneMenu>
+                    <p:message for="cartype" />
+
+
+                    <p:selectOneMenu id="operator" value="#{operatorService.driverId}" style="width:200px">
+                        <f:selectItem itemLabel="Select Driver" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{operatorService.driverList}" var="driver" itemValue="#{driver.id}" itemLabel="#{driver.user.username}"/>
+                    </p:selectOneMenu>
+
+
+                </h:panelGrid>
+
+                <h:commandButton value="Create a Car" action="#{operatorService.doAddCar}">
+                </h:commandButton>
+
+
+            </p:panel>
+        </h:form>
+
+
+        <h:form>
+            <p:dataTable var="car" value="#{operatorService.doFindAllCar()}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                <p:column headerText="Car Number">
+                    <h:outputText value="#{car.carNumber}" />
+                </p:column>
+
+                <p:column headerText="Manufacturer">
+                    <h:outputText value="#{car.carMake}" />
+                </p:column>
+
+                <p:column headerText="Model">
+                    <h:outputText value="#{car.carModel}" />
+                </p:column>
+
+                <p:column headerText="Registration Number">
+                    <h:outputText value="#{car.carLicenseNo}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

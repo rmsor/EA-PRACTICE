@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Operator</title>
+    </h:head>
+    <h:body>
+
+        <script type="text/javascript">
+            /**
+             * Faces Validator
+             */
+            PrimeFaces.validator['custom.emailValidator'] = {
+                pattern: /\S+@\S+/,
+                validate: function (element, value) {
+                    //use element.data() to access validation metadata, in this case there is none.
+                    if (!this.pattern.test(value)) {
+                        throw {
+                            summary: 'Validation Error',
+                            detail: value + ' is not a valid email.'
+                        }
+                    }
+                }
+            };
+        </script>
+
+        <h:form enctype="multipart/form-data" id="form">
+
+            <p:panel id="panel">
+                <h3 style="background-color: #f5f5f5; padding: 5px 0px 8px 2px; margin-top: 0px;">Add Operator</h3>
+                <p:messages id="messages" />
+
+                <h:panelGrid columns="1" cellpadding="7">
+
+
+                    <p:outputLabel for="firstname" value="First Name:" />
+                    <p:inputText id="firstname" value="#{adminService.operator.firstName}" required="true" label="firstname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="firstname" />
+
+                    <p:outputLabel for="lastname" value="Last Name:" />
+                    <p:inputText id="lastname" value="#{adminService.operator.lastName}" required="true" label="lastname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="lastname" />
+
+                    <p:outputLabel for="phonenumber" value="Phone Number:" />
+                    <p:inputMask id="phonenumber" value="#{adminService.operator.contactNumber}" mask="(999) 999-9999"/>
+                    <p:message for="phonenumber" />
+
+                    <h:outputLabel for="email" value="Email:" />
+                    <p:inputText id="email" value="#{adminService.operator.email}">
+                        <f:validator validatorId="custom.emailValidator" />
+                    </p:inputText>
+                    <p:message for="email" display="tooltip" />
+                    <h:outputText value="#{adminService.operator.email}" />
+
+                    <h:outputLabel value="Image: "/><p:fileUpload value="#{adminService.uploadedFile}" mode="simple" />
+
+                    <p:outputLabel for="dob" value="DOB:" />
+                    <p:calendar id="dob" value="#{adminService.operator.dob}" label="DOB" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="dob" />
+
+
+                    <p:outputLabel for="street" value="Street:" />
+                    <p:inputText id="street" value="#{adminService.operator.address.street}" required="true" label="Street"/>
+                    <p:message for="street" />
+
+
+                    <p:outputLabel for="city" value="City:" />
+                    <p:inputText id="city" value="#{adminService.operator.address.city}" required="true" label="City"/>
+                    <p:message for="city" />
+
+
+                    <p:outputLabel for="state" value="State:" />
+                    <p:inputText id="state" value="#{adminService.operator.address.state}" required="true" label="State"/>
+                    <p:message for="state" />
+
+                    <p:outputLabel for="zip" value="Zip:" />
+                    <p:inputText id="zip" value="#{adminService.operator.address.zip}" required="true" label="Zip"/>
+                    <p:message for="zip" />
+
+                    <p:outputLabel for="country" value="Country:" />
+                    <p:inputText id="country" value="#{adminService.operator.address.country}" required="true" label="Country"/>
+                    <p:message for="country" />
+
+                    <p:outputLabel for="username" value="Username:" />
+                    <p:inputText id="username" value="#{adminService.operator.user.username}" required="true" label="Username"/>
+                    <p:message for="username" />
+
+                    <p:outputLabel for="password" value="Password:" />
+                    <p:password id="password" value="#{adminService.operator.user.password}" feedback="true" />
+                    <p:message for="password" />
+
+                    <p:outputLabel for="operatortype" value="Operator Type:" />
+                    <h:selectOneMenu id="operatortype" value="#{adminService.operator.operatorType}" required="true" label="Operator Type">
+                        <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="KINGSIZE" itemValue="KINGSIZE" />
+                        <f:selectItem itemLabel="PRIMIUM" itemValue="PRIMIUM" />
+                        <f:selectItem itemLabel="STANDARD" itemValue="STANDARD" />
+                        <f:selectItem itemLabel="BASIC" itemValue="BASIC" />
+
+                    </h:selectOneMenu>
+                    <p:message for="operatortype" />
+                    <h:outputText value="#{selectorView.text16}" />
+
+
+                </h:panelGrid>
+                <h:commandButton value="Create a Operator" action="#{adminService.doAddOperator}">
+                </h:commandButton>
+
+                <!--                
+                                <p:commandButton value="Create Operator" action="" icon="ui-icon-check" validateClient="true"/>
+                                                <f:ajax execute="@form" render=":operatorlist :errors"/>                    
+                                <p:commandButton value="Reset" ajax="false" icon="ui-icon-check" validateClient="true"/>-->
+
+            </p:panel>
+
+        </h:form>
+
+        <h:form>
+            <p:dataTable id="operatorlist" var="opr" value="#{adminService.doFindAllOperator()}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                <p:column headerText="Username">
+                    <h:outputText value="#{opr.user.username}" />
+                </p:column>
+
+                <p:column headerText="Person Name">
+                    <h:outputText value="#{opr.lastName}" />
+                </p:column>
+
+                <p:column headerText="Company Name">
+                    <h:outputText value="#{opr.companyName}" />
+                </p:column>
+
+                <p:column headerText="Contact Number">
+                    <h:outputText value="#{opr.contactNumber}" />
+                </p:column>
+
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton update="" oncomplete="PF('operatorDialog').show()" icon="ui-icon-search" title="View">
+                        <f:setPropertyActionListener value="#{operator}" target="" />
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+
+    </h:body>
+</html>
+

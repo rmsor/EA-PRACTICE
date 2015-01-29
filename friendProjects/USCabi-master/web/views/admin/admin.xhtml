@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Operator</title>
+    </h:head>
+    <h:body>
+
+        <script type="text/javascript">
+            /**
+             * Faces Validator
+             */
+            PrimeFaces.validator['custom.emailValidator'] = {
+                pattern: /\S+@\S+/,
+                validate: function (element, value) {
+                    //use element.data() to access validation metadata, in this case there is none.
+                    if (!this.pattern.test(value)) {
+                        throw {
+                            summary: 'Validation Error',
+                            detail: value + ' is not a valid email.'
+                        }
+                    }
+                }
+            };
+        </script>
+
+        <h:form enctype="multipart/form-data" id="form">
+
+            <p:panel id="panel">
+                <h3 style="background-color: #f5f5f5; padding: 5px 0px 8px 2px; margin-top: 0px;">Add Admin</h3>
+                <p:messages id="messages" />
+
+                <h:panelGrid columns="1" cellpadding="7">
+
+                    <p:outputLabel for="username" value="Username:" />
+                    <p:inputText id="username" value="#{adminService.admin.user.username}" required="true" label="Username"/>
+                    <p:message for="username" />
+
+                    <p:outputLabel for="password" value="Password:" />
+                    <p:password id="password" value="#{adminService.admin.user.password}" feedback="true" />
+                    <p:message for="password" />
+
+                </h:panelGrid>
+                <h:commandButton value="Create Admin" action="#{adminService.doAddAdmin}">
+                </h:commandButton>
+            </p:panel>
+
+        </h:form>
+
+    </h:body>
+</html>
+

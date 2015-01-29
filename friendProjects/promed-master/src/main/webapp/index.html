@@ -1,0 +1,486 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+                                                                                                                                   xmlns:h="http://xmlns.jcp.org/jsf/html"
+                                                                                                                                   xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>ProMedical - Professional Medical Services</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Your description">
+        <meta name="keywords" content="Your keywords">
+        <meta name="author" content="Your name">
+        <link rel="icon" href="images/favicon.html" type="image/x-icon">
+        <link rel="shortcut icon" href="images/favicon.html" type="image/x-icon" />
+
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/bootstrap-responsive.css" type="text/css" media="screen">    
+        <link rel="stylesheet" href="css/camera.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+
+        <script type="text/javascript" src="js/jquery.js"></script>  
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="js/superfish.js"></script>
+
+        <script type="text/javascript" src="js/jquery.ui.totop.js"></script>
+
+        <script type="text/javascript" src="js/camera.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile.customized.min.js"></script>
+
+        <script type="text/javascript" src="js/jquery.caroufredsel.js"></script>
+        <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                // camera
+                $('#camera_wrap').camera({
+                    //thumbnails: true
+                    autoAdvance: true,
+                    mobileAutoAdvance: true,
+                    //fx					: 'simpleFade',
+                    height: '48%',
+                    hover: false,
+                    loader: 'none',
+                    navigation: false,
+                    navigationHover: true,
+                    mobileNavHover: true,
+                    playPause: false,
+                    pauseOnClick: false,
+                    pagination: true,
+                    time: 7000,
+                    transPeriod: 1000,
+                    minHeight: '200px'
+                });
+
+                //	carouFredSel
+                $('#slider3 .carousel.main ul').carouFredSel({
+                    auto: {
+                        timeoutDuration: 8000
+                    },
+                    responsive: true,
+                    prev: '.prev3',
+                    next: '.next3',
+                    width: '100%',
+                    scroll: {
+                        items: 1,
+                        duration: 1000,
+                        easing: "easeOutExpo"
+                    },
+                    items: {
+                        width: '380',
+                        height: 'variable', //	optionally resize item-height			  
+                        visible: {
+                            min: 1,
+                            max: 3
+                        }
+                    },
+                    mousewheel: false,
+                    swipe: {
+                        onMouse: true,
+                        onTouch: true
+                    }
+                });
+                $(window).bind("resize", updateSizes_vat).bind("load", updateSizes_vat);
+                function updateSizes_vat() {
+                    $('#slider3 .carousel.main ul').trigger("updateSizes");
+                }
+                updateSizes_vat();
+
+            }); //
+            $(window).load(function () {
+                //
+
+            }); //
+        </script>		
+        <!--[if lt IE 8]>
+                        <div style='text-align:center'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg"border="0"alt=""/></a></div>  
+                <![endif]-->    
+
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>      
+          <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen">
+        <![endif]-->
+    </head>
+
+    <body class="main">
+        <div id="main">
+
+            <div class="top1_wrapper">
+                <div class="top1_wrapper2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span12">
+                                <div class="top1 clearfix">
+                                    <div class="block1 clearfix">
+                                        <div class="menu_top clearfix">
+                                            <ul id="menu_top" class="clearfix">
+                                                <li><a href="dashboard">User login</a></li>
+                                                <li><a href="register.xhtml">Register</a></li>
+                                                <li><a href="index-7.html">Contacts</a></li>             
+                                            </ul>
+                                        </div>
+                                    </div>	
+                                    <div class="block2 clearfix">
+                                        <header><div class="logo_wrapper"><a href="index-2.html" class="logo"><img src="images/logo.png" alt=""></a></div></header>
+                                        <div class="phone1">1.800.123.4567</div>
+                                    </div>
+                                    <div class="menu_wrapper">
+                                        <div class="navbar navbar_">
+                                            <div class="navbar-inner navbar-inner_">
+                                                <a class="btn btn-navbar btn-navbar_" data-toggle="collapse" data-target=".nav-collapse_">
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="txt1">Menu</span>
+                                                </a>
+                                                <div class="nav-collapse nav-collapse_ collapse">
+                                                    <ul class="nav sf-menu clearfix">
+                                                        <li class="active"><a href="index-2.html">Home Page</a></li>
+                                                        <li><a href="index-1.html">About Us</a></li>
+                                                        <li><a href="index-3.html">Services</a></li>
+                                                        <li class="sub-menu sub-menu-1"><a href="index-4.html">Patient Care</a>
+                                                            <ul>
+                                                                <li><a href="index-4.html">Patient Care</a></li>
+                                                                <li class="sub-menu sub-menu-2"><a href="index-4.html">Useful Information<em></em></a>
+                                                                    <ul>
+                                                                        <li><a href="index-4.html">lorem ipsum dolor</a></li>
+                                                                        <li><a href="index-4.html">sit amet</a></li>
+                                                                        <li><a href="index-4.html">adipiscing elit</a></li>
+                                                                        <li><a href="index-4.html">nunc suscipit</a></li>
+                                                                        <li><a href="404.xhtml.html">404 page not found</a></li>
+                                                                    </ul>
+                                                                </li>						
+                                                                <li><a href="index-4.html">Consultancy Services</a></li>						
+                                                            </ul>						
+                                                        </li>
+                                                        <li><a href="index-5.html">Resources</a></li>
+                                                        <li><a href="index-6.html">Careers</a></li>
+                                                        <li><a href="index-7.html">Contact Us</a></li>											
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>	
+                                    </div>
+                                    <div id="slider_wrapper">
+                                        <div id="slider" class="clearfix">
+                                            <div id="camera_wrap">
+                                                <div data-src="images/slide01.jpg">
+                                                    <div class="camera_caption fadeIn">
+                                                        <div class="txt1">A broad range of</div>	
+                                                        <div class="txt2">Medical Consultancy<br>Services</div>	
+                                                        <a href="#" class="button0">Read More<em></em></a>						
+                                                    </div>     
+                                                </div>
+                                                <div data-src="images/slide02.jpg">
+                                                    <div class="camera_caption fadeIn">
+                                                        <div class="txt1">A broad range of</div>	
+                                                        <div class="txt2">Medical Consultancy<br>Services</div>	
+                                                        <a href="#" class="button0">Read More<em></em></a>						
+                                                    </div>     
+                                                </div>
+                                                <div data-src="images/slide03.jpg">
+                                                    <div class="camera_caption fadeIn">
+                                                        <div class="txt1">A broad range of</div>	
+                                                        <div class="txt2">Medical Consultancy<br>Services</div>	
+                                                        <a href="#" class="button0">Read More<em></em></a>						
+                                                    </div>     
+                                                </div>
+                                            </div>	
+                                        </div>
+                                        <img src="images/slider_shadow.png" alt="" class="slider_shadow">	
+                                    </div>
+                                </div>	
+                            </div>	
+                        </div>	
+                    </div>	
+                </div>
+            </div>
+
+            <div class="top2_wrapper">
+                <div class="top2_wrapper2">
+                    <div class="top2_wrapper3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="span12">
+
+                                    <div class="slogan1">OUR MISSION IS TO PROVIDE THE BEST POSSIBLE RESULTS<br>FOR OUR CLIENTS THROUGH THESE SERVICES:</div>
+
+                                    <div id="slider3">
+                                        <a class="prev3" href="#"></a>
+                                        <a class="next3" href="#"></a>		
+                                        <div class="carousel-box row">
+                                            <div class="inner span12">			
+                                                <div class="carousel main">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="banner banner1">
+                                                                <div class="banner_inner">
+                                                                    <a href="#">
+                                                                        <img src="images/banner1.png" alt="" class="img">
+                                                                        <div class="txt1">24/7 Medical<br>Assistance</div>
+                                                                        <div class="txt2">Details</div>								
+                                                                    </a>
+                                                                </div>
+                                                                <img src="images/banners_shadow.png" alt="" class="banners_shadow">
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="banner banner1">
+                                                                <div class="banner_inner">
+                                                                    <a href="#">
+                                                                        <img src="images/banner2.png" alt="" class="img">
+                                                                        <div class="txt1">Family Medicine<br>General Practice</div>
+                                                                        <div class="txt2">Details</div>								
+                                                                    </a>
+                                                                </div>
+                                                                <img src="images/banners_shadow.png" alt="" class="banners_shadow">
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="banner banner1">
+                                                                <div class="banner_inner">
+                                                                    <a href="#">
+                                                                        <img src="images/banner3.png" alt="" class="img">
+                                                                        <div class="txt1">Hospital<br>Medicine</div>
+                                                                        <div class="txt2">Details</div>								
+                                                                    </a>
+                                                                </div>
+                                                                <img src="images/banners_shadow.png" alt="" class="banners_shadow">
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="banner banner1">
+                                                                <div class="banner_inner">
+                                                                    <a href="#">
+                                                                        <img src="images/banner4.png" alt="" class="img">
+                                                                        <div class="txt1">Pediatric<br>Clinic</div>
+                                                                        <div class="txt2">Details</div>								
+                                                                    </a>
+                                                                </div>
+                                                                <img src="images/banners_shadow.png" alt="" class="banners_shadow">
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>	
+                            </div>	
+                        </div>	
+                    </div>	
+                </div>
+            </div>	
+
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="span8">
+
+                            <h1>Welcome to ProMedical company<b></b></h1>	
+
+                            <div class="thumb1">
+                                <div class="thumbnail clearfix">
+                                    <figure class=""><img src="images/home01.jpg" alt=""></figure>
+                                    <div class="caption">
+                                        <h4>We take a collaborative approach, which leads to successful project outcomes and ultimately establishes a partnership that lasts.</h4>
+                                        <p>
+                                            Feipsumorbi nunc odiovia suorem aecena stiq cumsan malestonsetue adipiscing elit. Dolorsedum. Mauris as fermen tum did oreealiquam leotum.
+                                        </p>			
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</h3>
+
+                            <p>
+                                Feipsumorbi nunc odiovia suorem aecena stiq cumsan malestonsetue adipiscing elit. Dolorsedum. Mauris as fermen tum did oreealiquam leotum dictum magna. Sed oreet aliquam leo. Ut tellus dolor dapibuselementum vel curus eleife elet. Aenean auctor wisi et urnat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Vestibulum libero nisl porta vel scelerisque eget malesuada at neque. Vivamus eget nibh etiam
+                            </p>
+
+                        </div>
+                        <div class="span4">
+
+                            <div id="tabbable1">
+                                <div class="tabbable">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab1" data-toggle="tab">Directory</a></li>
+                                        <li><a href="#tab2" data-toggle="tab">Services</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab1">
+                                            <ul class="ul1">
+                                                <li><a href="#">Allergy</a></li>
+                                                <li><a href="#">Anticoagulation</a></li>
+                                                <li><a href="#">Breast Health Center</a></li>
+                                                <li><a href="#">Bronchoscopy/PFT</a></li>
+                                                <li><a href="#">Cardiology</a></li>  
+                                                <li><a href="#">Cardiology Procedures</a></li>
+                                                <li><a href="#">Cardiothoracic Transplant Program</a></li>
+                                                <li><a href="#">Continence</a></li>  	            		      	      			      
+                                            </ul>    
+
+                                            <a href="#" class="button1">Read More</a>
+
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+                                            <ul class="ul1">
+                                                <li><a href="#">Lorem ipsum dolor sit amet conse</a></li>
+                                                <li><a href="#">Dtetur adipisicing elit, sed d</a></li>
+                                                <li><a href="#">Empor incididunt ut labore et dolore</a></li>
+                                                <li><a href="#">Ipsum dolor sit amet conse ctetur</a></li>
+                                                <li><a href="#">Adipisicing elit, sed do eiusmod</a></li>  
+                                                <li><a href="#">Tempor incididunt ut labore et dolore</a></li>
+                                                <li><a href="#">Magna aliqua. Ut enim ad minim</a></li>
+                                                <li><a href="#">Veniam, quis nostrud exercitation </a></li>  	            		      	      			      
+                                            </ul>  
+
+                                            <a href="#" class="button1">Read More</a>
+
+                                        </div>
+                                    </div>
+                                </div>	
+                            </div>
+
+                        </div>	
+                    </div>	
+                </div>	
+            </div>
+
+            <div id="content2">
+                <div class="container">
+                    <div class="row">
+                        <div class="span4">
+
+                            <h2>Who We Are <b></b></h2>
+
+                            <div class="thumb2">
+                                <div class="thumbnail clearfix">
+                                    <figure class=""><img src="images/home02.jpg" alt=""></figure>
+                                    <div class="caption">			
+                                        <p>
+                                            Feipsumorbi nunc odiovia suorem aecena stiq cumsan malestonsetue adipiscing elit. Dolorsedum. Mauris as fermen tum did oreealiquam leotum dictum magna. Sed oreet aliquam leo. Ut tellus dolor dapibuselementum vel curus eleife elet. Aenean auctor wisi et urnat volutpat.
+                                        </p>
+                                        <a href="#" class="button1">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="span4">
+
+                            <h2>Popular Services <b></b></h2>
+
+                            <h4>Clinical R&D Consulting</h4>
+                            <p>
+                                massasoluta nobis estumod eligendi omnis volutasassumenda est, omnis dolores edon repe
+                            </p>
+                            <br>
+
+                            <h4>Medical Communications</h4>
+                            <p>
+                                Nunc mollis lectus in dolor. Curabitur velit. Curabitur commodo vestibulum justo. Praesent dictum, est ut porta adipiscing.
+                            </p>
+                            <br>
+
+                            <h4>Diabetic</h4>
+                            <p>
+                                Nunc mollis lectus in dolor. Curabitur velit. Curabitur commodo vestibulum justo. Praesent dictum, est ut porta adipiscing.
+                            </p>
+
+
+                            <a href="#" class="button1">Read More</a>
+
+                        </div>
+                        <div class="span4">
+
+                            <h2>Latest News <b></b></h2>
+
+                            <div class="date1 clearfix">
+                                <div class="txt1">24</div>
+                                <div class="txt2">January</div>
+                            </div>
+                            <h4><a href="#">Suspendisse enim arcu</a></h4>
+                            <p>
+                                Mauris scelerisque augue eu felis. Nunc quam massa, mattis quis, hendrerit sed, mattis eu, est. Vivamus pretium metus ut nisl. 
+                            </p>
+                            <br>
+
+                            <div class="date1 clearfix">
+                                <div class="txt1">05</div>
+                                <div class="txt2">March</div>
+                            </div>
+                            <h4><a href="#">Aenean semper aliquet libero</a></h4>
+                            <p>
+                                Integer lacinia, velit sit amet bibendum hendrerit, neque justo ornare urna, non sodales nunc nibh vel purus. In urna.
+                            </p>
+
+                            <a href="#" class="button1">Read More</a>
+
+
+
+
+                        </div>	
+                    </div>	
+                </div>	
+            </div>
+
+            <div class="bot1_wrapper">
+                <div class="bot1_wrapper2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span4">
+
+                                <div class="logo2_wrapper"><a href="index-2.html" class="logo2"><img src="images/logo2.png" alt=""></a></div>
+
+                            </div>	
+                            <div class="span4">
+
+                                <div class="bot1_title">Contact Us:</div>
+
+                                <p>
+                                    8901 Marmora Road, Glasgow, D04 89GR.<br><b>Telephone: +1 800 123 1234</b>
+                                </p>
+
+                            </div>
+                            <div class="span4">
+
+                                <div class="bot1_title">Find us on:</div>
+
+                                <div class="social_wrapper">
+                                    <ul class="social clearfix">
+                                        <li><a href="#"><img src="images/social_ic1.png"></a></li>
+                                        <li><a href="#"><img src="images/social_ic2.png"></a></li>
+                                        <li><a href="#"><img src="images/social_ic3.png"></a></li>	    
+                                        <li><a href="#"><img src="images/social_ic4.png"></a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>	
+                    </div>	
+                </div>
+            </div>
+
+            <div class="bot2_wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <footer><div class="copyright">Copyright   © 2013. All rights reserved.&nbsp;&nbsp;&nbsp;<a href="#">Privacy Policy</a></div></footer>
+                        </div>	
+                    </div>	
+                </div>	
+            </div>
+
+
+
+
+
+
+        </div>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+    </body>
+
+    <!-- Mirrored from www.bootstrap-template.com/templates/bootstrap-templates/300111755/template/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Nov 2014 03:00:49 GMT -->
+</html>

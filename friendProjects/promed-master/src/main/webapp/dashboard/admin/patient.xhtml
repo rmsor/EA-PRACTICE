@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+    
+    
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">            
+            <c:if test="#{param['id'] != null}">
+                <f:event type="preRenderView" listener="#{patientBean.editPatient(param['id'])}" />
+            </c:if>
+     
+           
+           <div id="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span8">
+   
+                                <h2>Patient</h2>
+                                
+                                <h:outputLabel class="hello" value="#{message}"/>
+                                
+                                <h:form>
+                                
+                                <h:messages class="errors"/>
+
+                                <h3>Client:</h3>
+                                <p>
+                                    
+                                    <h:selectOneMenu id="patient" value="#{patientBean.selected.client}">
+                                        <f:selectItems value="#{clientBean.listAllClients()}" var="client" itemValue="#{client}" itemLabel="#{client.fullName}"/>
+                                        <f:converter converterId="clientConverter"/>
+                                    </h:selectOneMenu>
+                                    <h:message class="error" for="client"/>
+                                </p>
+                                
+                                <hr/>
+                                <h3>Patient Info</h3>
+                                <p>
+                                    <h:inputHidden value="#{patientBean.selected.id}"/>
+                                    <h:outputLabel value="First Name:"/>
+                                    <h:inputText class="input-xxlarge" label="First Name" id="firstName" required="true" rendered="true" value="#{patientBean.selected.firstName}"/><br/>
+                                    <h:message class="error" for="firstName"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="Last Name:"/>
+                                    <h:inputText class="input-xxlarge" label="Last Name" id="lastName" required="true" rendered="true" value="#{patientBean.selected.lastName}"/><br/>
+                                    <h:message class="error" for="lastName"/>
+                                </p>
+                                
+                                <p>
+                                    <h:outputLabel value="Date of Birth:"/>
+                                    <h:inputText class="input-xxlarge datepicker"  label="Date of Birth" id="dateOfBirth" required="true" rendered="true" value="#{patientBean.selected.dateOfBirth}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd" type="date" />
+                                    </h:inputText>
+                                    <h:message class="error" for="dateOfBirth"/>
+                                </p>
+                                
+                                <p>
+                                    <h:outputLabel value="Relation with User:"/>
+                                    <h:inputText class="input-xxlarge" label="Relation To Client" id="relationToClient" required="true" rendered="true" value="#{patientBean.selected.relationToClient}"/><br/>
+                                    <h:message class="error" for="relationToClient"/>
+                                </p>
+                                
+                                <p>
+                                    <h:commandButton class="btn btn-primary" action="#{patientBean.createPatient()}" value="Submit"/>
+                                </p>
+                            </h:form>  
+                                
+                                
+                                
+                            </div>
+                            <div class="span4">
+
+                                
+
+
+
+                            </div>	
+                        </div>	
+                        
+                    </div>	
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+        </ui:define>
+    </ui:composition>        
+ 
+</html>  

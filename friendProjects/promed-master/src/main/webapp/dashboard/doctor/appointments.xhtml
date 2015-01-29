@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+
+
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">            
+
+
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                           
+                            <h2>Appointments</h2>
+                            
+                            <c:if test="#{message != null}">
+                                <p class="alert alert-success">#{message}</p>
+                            </c:if>
+
+                            <h:form>
+                                
+                                <h:dataTable class="table-bordered table table-striped" value="#{doctorBean.listDoctorAppointments()}" var="appointment">
+                                
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Patient Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.patient.fullName}"/>
+                                    </h:column>
+                                    
+                                    
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Problems"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.problems}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Prescription"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.prescription}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.date}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Status"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.status}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Edit"/>
+                                        </f:facet>
+                                        <h:commandButton value="Details" class="btn btn-small" action="#{appointmentBean.editAppointment(appointment)}"/>
+                                        <h:commandButton value="Prescripton" class="btn btn-small" action="#{appointmentBean.addPresecription(appointment)}"/>
+                                    </h:column>
+                                    
+                                    
+                                </h:dataTable>
+                                
+                                
+
+
+                            </h:form>  
+
+
+
+                        </div>
+                        
+                    </div>	
+
+                </div>	
+            </div>
+
+
+
+
+
+
+
+
+        </ui:define>
+    </ui:composition>        
+
+</html>  

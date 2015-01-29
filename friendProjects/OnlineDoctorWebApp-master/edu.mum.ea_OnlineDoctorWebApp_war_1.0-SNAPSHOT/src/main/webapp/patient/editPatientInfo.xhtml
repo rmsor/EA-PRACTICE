@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:form  id="editPatientInfo">
+
+            <h:panelGrid columns="3" cellpadding="6">
+                <p:commandLink value="Change my password" action="changePassword"/> 
+                <p:commandLink value="Edit my address" action="editAddress"/>
+                <br/>
+
+                <p:outputLabel value="First Name: "/>
+
+                <p:inplace id="basic">
+                    <p:inputText id="first" value="#{editPatientBean.patient.firstName}">
+
+                        <f:ajax event="blur" render="firstError"/>
+                    </p:inputText>
+                </p:inplace>
+
+                <h:message for="first" id="firstError" style="color: red"/>
+                <p:outputLabel value="Last Name: "/>
+                <p:inplace>
+                    <p:inputText id="last" value="#{editPatientBean.patient.lastName}">
+                        <f:ajax event="blur" render="lastError"/>
+                    </p:inputText>
+                </p:inplace>
+                <p:message for="last"  id="lastError" style="color: red"/>
+
+                <p:outputLabel  for="dateOfBirth" value="Date of Birth" />
+                <p:inplace>
+                    <p:calendar id="dateOfBirth" value="#{editPatientBean.patient.dateofBirth}"
+                                required="true"                  
+                                validator="#{editPatientBean.validateDateofBirth}">
+
+                        <p:ajax event="change" update="errorDateOfBirth"/>
+                    </p:calendar>
+                </p:inplace>
+                <p:message for="dateOfBirth"  id="errorDateOfBirth" style="color: red"/>
+
+                <p:outputLabel value="Phone Number (Home) "/>
+
+                <p:inplace >
+                    <p:inputMask id="homePhoneNo" value="#{editPatientBean.patient.homePhoneNo}" mask="(999) 999-9999"/>
+                </p:inplace >
+                <h:message for="homePhoneNo" style="color: red"/>
+                <p:outputLabel value="Phone Number (Cell) "/>
+                <p:inplace>
+                    <p:inputMask id="cellPhoneNo" value="#{editPatientBean.patient.cellPhoneNo}" mask="(999) 999-9999"/>
+                </p:inplace>
+                <h:message for="cellPhoneNo" style="color: red"/>
+
+                <p:outputLabel value="Phone Number (Work) "/>
+                <p:inplace>
+                    <p:inputMask id="workPhoneNo" value="#{editPatientBean.patient.workPhoneNo}" mask="(999) 999-9999"/>
+                </p:inplace>
+                <h:message for="workPhoneNo" style="color: red"/>
+                <p:outputLabel value="Username: "/>
+
+                <p:inplace>
+                    <p:inputText id="username" value="#{editPatientBean.patient.userName}">
+
+                    </p:inputText>
+                </p:inplace>
+                <p:message for="username" id="userNameError" style="color: red"/>
+
+
+                <p:outputLabel value="email"/>
+
+                <p:inplace>
+                    <p:inputText id="email" value="#{editPatientBean.patient.email}" >
+                        <f:ajax event="blur" render="emailError"/>
+                    </p:inputText>
+                </p:inplace>
+                <p:message for="email" id="emailError" style="color: red"/>
+
+
+                <p:commandButton value="Save Changes" action="#{editPatientBean.updatePatient()}"/>
+                <p:commandButton value="Cancel" immediate="true"/>
+
+                <h:messages style="color:red" />
+            </h:panelGrid>
+        </h:form>
+
+
+    </h:body>
+</html>
+

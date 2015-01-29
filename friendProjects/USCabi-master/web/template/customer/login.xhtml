@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--<html>-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Login</title>>
+        <h:outputStylesheet name="style.css" library="css" />
+    </h:head>
+
+<h:body>
+
+  <h:body>
+      <h:form>
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Login</h1>
+			</div>
+
+			<div class="login-form">
+				<div class="control-group">
+                                    <p:inputText type="Username" placeholder="Username" value="#{CustomerService.pickUsername}" />
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+
+				<div class="control-group">
+                                    <p:inputText type="password" placeholder="Password" value="#{CustomerService.pickPassword}"></p:inputText>
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
+
+                            <p:accordionPanel></p:accordionPanel>
+                                
+                            <h:commandButton class="btn btn-primary btn-large btn-block" action="#{CustomerService.validateuser}" value="Login"></h:commandButton>
+				
+                            
+                            
+				<br />
+                                <a style="color: darkgray" href="Registration.xhtml">Want to Create An USCabi Customer Account?</a>
+                                <br />
+                                
+                                <br />
+                                <a style="color: darkgray" href="commonLayout.xhtml">Free Booking!</a>
+                                <br />
+                                
+                                
+                                <a class="login-link" href="#">Lost your password?</a>
+			</div>
+		</div>
+	</div>
+          
+          </h:form>
+</h:body>
+
+</h:body>
+
+</html>

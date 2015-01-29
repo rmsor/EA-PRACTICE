@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Hotel</title>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/masterLayout.xhtml">
+            <ui:define name="content">
+                
+                <table width="100%" border="0" bgcolor="#FFFFFF" cellspacing="8">
+                    <tr>
+                        <td>
+                            <h3><h:outputText id="hotelLink" value="#{roomBookingController.hotel.name}" /></h3>
+
+                            <div class="hotel_info_location">
+                                <div class="hotel_info_address">
+                                    <h:outputText value="#{roomBookingController.hotel.address.street}"/>,
+                                    <h:outputText value="#{roomBookingController.hotel.address.city}" />,
+                                    <h:outputText value="#{roomBookingController.hotel.address.province}" />,
+                                    <h:outputText value="#{roomBookingController.hotel.address.zipCode}" />
+
+
+                                    <ui:repeat value="#{locationController.getHotelLocation(roomBookingController.hotel)}" var="location">
+                                        (<p:commandLink value="Show on map" type="button" onclick="PF('dlg3').show();" />)
+                                        <p:dialog header="#{roomBookingController.hotel.name}" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" width="650" height="450">
+                                            <p:gmap center ="#{mapBean.setCenterCoords(location,roomBookingController.hotel.name)}"
+                                                    model="#{mapBean.mapModel}" zoom="15" type="TERRIAN" style="width:600px;height:400px" />
+                                        </p:dialog>  
+                                    </ui:repeat>
+
+
+
+                                </div>
+                            </div>
+
+                            <p id="reveStarImg">
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate>=1}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==0}"/>
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate>=2}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate>=3}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==2 or roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate>=4}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==3 or roomBookingController.hotel.rate==2 or roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==5}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==4 or roomBookingController.hotel.rate==3 or roomBookingController.hotel.rate==2 or roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
+                                #{roomBookingController.hotel.reviews.size()} verified customer reviews
+                            </p>
+
+                        </td>
+                    </tr>
+                </table>
+                <h:form><center>
+                        <p:galleria value="#{pictureController.getHotelPictures(roomBookingController.hotel)}" var="image" panelWidth="780" showCaption="false">
+                            <p:graphicImage value="../#{image.path}"/>
+                        </p:galleria>
+                    </center>
+                    <table width="100%" style="background-color: white; border-collapse: collapse;" class="room_list" >
+                        <col width="220px"/>
+                        <col width="150px"/>
+                        <col width="100px"/>
+                        <col width="100px"/>
+                        <col width="100px"/>
+
+                        <thead>
+                            <tr>
+                                <th>Picture</th>
+                                <th>Max</th>
+                                <th>Price</th>
+                                <th>No. Rooms </th>
+                                <th>Total price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <ui:repeat value="#{roomBookingController.rooms}" var="item">
+                            <tr>
+                                <td>
+                                    #{item.type}<br/>
+                                    <h:graphicImage value="../#{item.path}" width="160" />
+                                    <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty item.path}" />
+                                </td>
+                                <td>
+                                    #{item.max}
+                                </td>
+                                <td>
+                                    #{item.price}
+                                </td>
+                                <td>
+                                    <h:selectOneMenu id="subscriptions" value="#{roomBookingController.selected.noRoom}">
+                                        <f:selectItem id="item1"  itemValue="1" />
+                                        <f:selectItem id="item2"  itemValue="2" />
+                                        <f:selectItem id="item3"  itemValue="3" />
+                                        <f:selectItem id="item4"  itemValue="4" />
+                                        <f:selectItem id="item5"  itemValue="5" />
+                                        <f:ajax render="maxId"/>
+                                    </h:selectOneMenu>
+                                </td>
+                                <td>
+                                    <h:outputText id="maxId" value="#{item.price * roomBookingController.selected.noRoom}"/>
+                                </td>
+                                <td>
+                                    <p:commandButton action="#{roomBookingController.addingRoom(item)}" value="Book"/>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                    <div style="background-color: white; border-collapse: collapse;" class="room_list">
+                        <ui:repeat  value="#{roomBookingController.hotel.hotelFeatures}" var="feature">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="#{feature.feature_type}"/>
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <p:outputLabel value="#{feature.discription}"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </ui:repeat>
+                    </div>
+                        
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

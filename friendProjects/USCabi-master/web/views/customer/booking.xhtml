@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Booking</title>
+       
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places">
+       </script>
+     
+        
+        
+       <script type="text/javascript">
+        
+       "use strict";
+ 
+      
+      
+       var coordinatesArray = new Array();;
+       var carid;
+      var countryRestrict = { 'country': 'us' };
+      var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green';
+      var hostnameRegexp = new RegExp('^https?://.+?/');
+      var drivermarkers,mainMap;
+
+      function initialize() {
+      var mapOptions = {
+       zoom: 4,
+      center: new google.maps.LatLng(38.8833,77.0167)
+      };
+      mainMap = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
+ 
+     drivermarkers = #{CustomerService.doLoadDriverStatusLocation()};
+
+ 
+ 
+ 
+}
+ 
+function autocompletefunc(){
+    
+    
+          var pickUpAddress = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('pickUpAddress')),
+     { types: ['geocode'] });
+      
+       var dropOffAddress = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('dropOffAddress')),
+      { types: ['geocode'] });
+      
+     google.maps.event.addListener(dropOffAddress, 'place_changed', function() {
+    addPickUpMarker();
+  });
+  
+}
+
+ 
+
+
+// When the user selects a city, get the place details for the city and
+// zoom the map in on the city.
+ 
+  
+  
+  
+ function addPickUpMarker(){
+     
+
+  
+     var geocoder = new google.maps.Geocoder();
+     var address1 = document.getElementById('pickUpAddress').value;
+
+
+  geocoder.geocode( { 'address': address1}, function(results, status) {
+ 
+  if (status === google.maps.GeocoderStatus.OK) {
+    var latitude = results[0].geometry.location.lat();
+    var longitude = results[0].geometry.location.lng();
+    var myLatlng = new google.maps.LatLng(latitude,longitude);
+    
+    coordinatesArray.push(myLatlng);
+    
+    var mapOptions = {
+    zoom: 7,
+    center: myLatlng
+    };
+     mainMap = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
+            
+    var image = 'passenger.png';
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: mainMap,
+      icon: image,
+      title: 'Hello World!'
+  });
+  ///////////////////////////////////////////////////////
+} 
+}); 
+     
+     
+     
+  
+    var address2 = document.getElementById('dropOffAddress').value; 
+     
+    geocoder.geocode( { 'address': address2}, function(results, status) {
+ 
+    if (status === google.maps.GeocoderStatus.OK) {
+    var latitude = results[0].geometry.location.lat();
+    var longitude = results[0].geometry.location.lng();
+    var myLatlng = new google.maps.LatLng(latitude,longitude);
+    
+    coordinatesArray.push(myLatlng);
+            
+    var image = 'destination.png';
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: mainMap,
+      
+      icon: image,
+      title: 'Hello World!'
+  });
+  ///////////////////////////////////////////////////////
+
+      } 
+}); 
+     
+
+ setTimeout(sourceToDestination,1000);
+ }
+ 
+
+  function addMarkerToMap() {
+  var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+  var mapOptions = {
+    zoom: 4,
+    center: myLatlng
+  };
+  var map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
+  var image = 'passenger.png';
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      icon: image,
+      title: 'Hello World!'
+  });
+}
+
+
+
+    function sourceToDestination(){
+    //            
+
+            //***********ROUTING****************//
+
+            //Intialize the Path Array
+            var path = new google.maps.MVCArray();
+
+            //Intialize the Direction Service
+            var service = new google.maps.DirectionsService();
+
+            //Set the Path Stroke Color
+            var poly = new google.maps.Polyline({ map: mainMap, strokeColor: '#4986E7' });
+
+            //Loop and Draw Path Route between the Points on MAP
+            for (var i = 0; i &lt; coordinatesArray.length; i++) {
+                if ((i + 1) &lt; coordinatesArray.length) {
+                    var src = coordinatesArray[i];
+                    var des = coordinatesArray[i + 1];
+                    path.push(src);
+                    poly.setPath(path);
+                    service.route({
+                        origin: src,
+                        destination: des,
+                        travelMode: google.maps.DirectionsTravelMode.DRIVING
+                    }, function (result, status) {
+                        if (status === google.maps.DirectionsStatus.OK) {
+                            for (var i = 0, len = result.routes[0].overview_path.length; i &lt; len; i++) {
+                                path.push(result.routes[0].overview_path[i]);
+                            }
+                        }
+                    });
+                }
+            }
+            
+            
+             setTimeout(ShortestDistance,2000);
+             setTimeout(loadMultipleDriver,3000);
+        }
+
+
+function ShortestDistance(){
+    
+    var dist = google.maps.geometry.spherical.computeDistanceBetween(coordinatesArray[0], coordinatesArray[1]).toFixed(2);
+    document.getElementById('distance').value = dist/1000;
+}
+   function loadMultipleDriver(){
+
+
+       var marker, i;
+       var image = 'taxi_icon.png';
+        for (i = 0; i &lt; drivermarkers.length; i++) { 
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(drivermarkers[i].lat, drivermarkers[i].lng),
+            icon: image,
+            map: mainMap
+          });
+          
+        attachSecretMessage(marker, drivermarkers[i]);
+
+        };
+   }
+   
+   
+ function attachSecretMessage(marker, infoObj) {
+  
+  var infowindow = new google.maps.InfoWindow({
+    content: " "
+    
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+   // infowindow.open(marker.get('map'), marker);
+   
+   carid = infoObj.carid;
+   
+   
+      infowindow.setContent('<p>Driver Name: '+infoObj.title+'</p>' +
+            '<p>Phone: '+infoObj.phone+'</p>' +
+            '<p>Date: '+infoObj.date+'</p>' +
+            '<button onclick="sendCarID()">Choose Car</button>');
+             infowindow.open(mainMap, this);
+  });
+  
+  ///<h:commandButton value="Choose Driver" onclick="#{CustomerService.addCarID(infoObj.carid)}"></h:commandButton><br /><br />
+}
+
+function sendCarID(){
+    document.getElementById("carid").value = carid;
+     document.getElementById("carid").style.color =  "border-color: green";
+    
+}
+     
+    </script>
+
+        
+        
+    </h:head>
+
+    <h:body onload="initialize()">  
+
+<h:form prependId="false">
+        <table align="left">     
+             
+
+                <tr>
+                    <td><p:outputLabel  value="Pick Up: " style="color: black;font-weight:lighter;" /></td>
+                    <td> <p:inputText id="pickUpAddress"  onclick="autocompletefunc()" type="text" value="#{CustomerService.booking.source}"></p:inputText> </td>
+                </tr>
+
+                <tr>
+                    <td><p:outputLabel  value="Drop: " style="color: black;font-weight:lighter;"/></td>
+                    <td><p:inputText  id="dropOffAddress"  onclick="autocompletefunc()" type="text" value="#{CustomerService.booking.destination}"></p:inputText></td>
+                </tr>
+                <tr>
+                    <td><p:outputLabel value="Distance: " style="color: black;font-weight:lighter;"/></td>
+                    <td><p:inputText id="distance" disabled="true"  type="text" value="#{CustomerService.carId}"></p:inputText></td>
+                </tr>
+                <tr>
+                    <td><p:outputLabel value="Bagage: " style="color: black;font-weight:lighter;"/></td>
+                    <td><p:spinner id="minMax1" value="#{CustomerService.booking.noOfBagage}" min="0" max="10" /></td>
+                </tr>
+                <tr>
+                    <td><p:outputLabel value="passenger: " style="color: black;font-weight:lighter;"/></td>
+                    <td><p:spinner id="minMax2" value="#{CustomerService.booking.noOfPeople}" min="0" max="10" /></td>
+                </tr>
+                <tr>
+                    <td><p:outputLabel value="Kids: " style="color: black;font-weight:lighter;"/></td>
+                    <td><p:spinner id="minMax3" value="#{CustomerService.booking.noOfKids}" min="0" max="100" /></td>
+                </tr>
+
+                <tr>
+                    <td><p:outputLabel value="Notes To Driver: " style="color: black;font-weight:lighter;"/></td>
+                    <td><p:inputTextarea rows="6" cols="22" value="#{CustomerService.booking.noteToDriver}" /></td>
+                </tr>
+
+                <tr>
+                    <td><p:outputLabel value="Tips Amount: " style="color: black;font-weight:lighter;"/></td>
+                    <td><p:inputText type="text"  value="#{CustomerService.booking.tipAmount}"></p:inputText></td>
+                </tr>
+
+                <tr>
+                    <td><p:outputLabel value="Car: " style="color: black;font-weight:lighter;"/></td>
+                    <td><p:inputText id="carid" disabled="true"  type="text" value="#{CustomerService.carId}"></p:inputText></td>
+                </tr>
+
+                <tr>
+                    <td>
+
+                        <h:outputText value="Prefered Disabled: " />
+                        <p:selectBooleanCheckbox value="#{CustomerService.booking.preferDisabled}" />
+                    </td>
+
+                    <td>
+                        <h:outputText value="Add To Favourite: " />
+                        <p:selectBooleanCheckbox value="#{CustomerService.booking.favouriteAddress}" />
+                    </td>
+                </tr>
+
+
+                <tr>
+
+                    <td> 
+
+                        <h:commandButton value="Create Booking" action="#{CustomerService.doAddBooking()}"> </h:commandButton>
+
+                    </td>
+
+                </tr>
+
+
+        </table> 
+    
+            </h:form>
+
+        <div id="dvMap" style="width: 65%; height: 500px;float: left">
+        </div>    
+
+
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <h:panelGrid columns="3" cellpadding="3">
+
+                <p:outputLabel for="userName" value=" User Name:" />
+                <p:inputText id="userName" value="#{patientBean.patient.userName}"/>
+                <p:message for="userName" />
+
+                <p:outputLabel for="password" value=" Password:" />
+                <p:password id="password" value="#{patientBean.patient.userPassword}" feedback="false" match="pwd2" label="Password 1" required="true"/>
+                <p:message for="password" />
+
+                <p:outputLabel for="pwd2" value="Confirm Password"/>
+                <p:password id="pwd2" value="#{patientBean.patient.userPassword}" feedback="false" label="Password 2" required="true"/>
+                <p:message for="pwd2" />
+
+                <p:outputLabel for="firstName" value= "First Name :" />
+                <p:inputText id="firstName" value="#{patientBean.patient.firstName}"></p:inputText>
+                <p:message for="firstName" />
+
+                <p:outputLabel for="lastName" value="Last Name :" />
+                <p:inputText id="lastName" value="#{patientBean.patient.lastName}"></p:inputText>
+                <p:message for="lastName" />
+
+
+                <p:outputLabel for="gender" value="Gender :" />
+                <p:selectOneRadio id="gender" value="#{patientBean.patient.gender}">
+                    <f:selectItem itemLabel="Female" itemValue="FEMALE" />
+                    <f:selectItem itemLabel="Male" itemValue="MALE" />
+                </p:selectOneRadio>
+                <p:message for="gender" />
+
+                <p:outputLabel for="dateofBirth" value="Date Of Birth :" />
+                <p:calendar id="dateofBirth" value="#{patientBean.patient.dateofBirth}" showOn="button" navigator="true" yearRange="c-70:c+10" locale="it">
+                    <f:convertDateTime  pattern="dd/MM/yyyy" />
+                </p:calendar>
+                <p:message for="dateofBirth" />
+
+
+                <p:outputLabel for="cellPhone" value=" Cell Phone:" />
+                <p:inputText id="cellPhone" value="#{patientBean.patient.cellPhoneNo}" />
+                <p:message for="cellPhone" />
+
+                <p:outputLabel for="workPhone" value=" Work Phone" />
+                <p:inputText id="workPhone" value="#{patientBean.patient.workPhoneNo}" />
+                <p:message for="workPhone" />
+
+                <p:outputLabel for="email" value=" Email:" />
+                <p:inputText id="email" value="#{patientBean.patient.email}" />
+                <p:message for="email" />
+
+            </h:panelGrid>
+
+            <p:fieldset legend="Address" toggleable="true" toggleSpeed="500">
+                <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
+
+                <h:panelGrid columns="3" cellpadding="2">
+
+                    <p:outputLabel for="Street" value="Street:" />                
+                    <p:inputText id="Street" value="#{patientBean.address.street}"/>
+                    <p:message for="Street" />
+
+                    <p:outputLabel for="city" value="City:"/>
+                    <p:inputText id="city" value="#{patientBean.address.city}"/>
+                    <p:message for="city" />
+
+                    <p:outputLabel for="state" value="State:" />
+                    <p:inputText id="state" value="#{patientBean.address.state}"/>
+                    <p:message for="state" />
+
+                    <p:outputLabel for="zipCode" value="Zip Code:" />
+                    <p:inputText id="zipCode" value="#{patientBean.address.zipCode}"/>
+                    <p:message for="zipCode" />
+
+                    <p:outputLabel for="country" value="Country :" />
+                    <p:inputText id="country" value="#{patientBean.address.country}"/>
+                    <p:message for="country" />
+
+                </h:panelGrid>
+            </p:fieldset>
+
+            <h:commandButton action="#{patientBean.addPatient()}" value="add Patient" />
+            <p:spacer></p:spacer>
+            <p:spacer></p:spacer>
+        </h:form>
+
+    </h:body>
+
+
+</html>
+

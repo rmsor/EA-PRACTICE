@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+
+    <h:head>
+        <h:outputStylesheet name="common-style.css" library="css" />
+
+        <style>
+            #map-canvas {
+              
+                height: 1020px;
+            }
+        </style>
+       <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
+       
+        <script>
+            var drivermarkers,mainMap;
+       
+ 
+            function initialize() {
+                
+                       drivermarkers = [
+            {
+                "title": 'Md Adit Hasan',
+                "lat": '41.10289744',
+                "lng": '-91.83883667',
+                "description": 'Alibaug is a coastal town and a municipal council in Raigad District in the Konkan region of Maharashtra, India.'
+            }
+        ,
+            {
+                "title": 'Noman Bin Mannan',
+                "lat": '40.9915605',
+                "lng": '-92.16636658',
+                "description": 'Pune is the seventh largest metropolis in India, the second largest in the state of Maharashtra after Mumbai.'
+            },
+            {
+                "title": 'Tonmay Bhattacharjee',
+                "lat": '40.98534079',
+                "lng": '-91.82853699',
+                "description": 'Pune is the seventh largest metropolis in India, the second largest in the state of Maharashtra after Mumbai.'
+            }
+];
+ 
+           
+            }
+            
+            
+              function loadMultipleDriver(){
+
+  var mapOptions = {
+   
+    center: new google.maps.LatLng(drivermarkers[0].lat, drivermarkers[0].lng),
+     zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+       mainMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+ 
+        var marker, i;
+        var image = 'taxi_icon.png';
+        for (i = 0; i &lt; drivermarkers.length; i++) { 
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(drivermarkers[i].lat, drivermarkers[i].lng),
+            icon: image,
+            map: mainMap
+          });
+          
+        attachSecretMessage(marker, drivermarkers[i].title);
+
+        }
+   }
+   
+   
+ function attachSecretMessage(marker, message) {
+  
+  var infowindow = new google.maps.InfoWindow({
+    content: message
+    
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(marker.get('map'), marker);
+  });
+}
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+
+    </h:head>
+
+    <h:body onload="loadMultipleDriver();">
+
+        <div id="page">
+
+            <div id="header">
+                <ui:insert name="header" >
+                    <ui:include src="header.xhtml" />
+                </ui:insert>
+            </div>
+            <div class="middlepanel">
+                <div class="leftpanel">
+                    <ui:insert name="leftpanel" >
+                        <ui:include src="registration.xhtml" />
+                    </ui:insert>
+                </div>
+
+                <div class="content">
+                    <ui:insert name="content" >
+                        <div id="map-canvas">
+                            
+                            
+                        </div>
+                    </ui:insert>
+                </div>
+            </div>
+
+            <div id="footer">
+                <ui:insert name="footer" >
+                    <ui:include src="footer.xhtml" />
+                </ui:insert>
+            </div>
+
+        </div>
+
+    </h:body>
+
+</html>

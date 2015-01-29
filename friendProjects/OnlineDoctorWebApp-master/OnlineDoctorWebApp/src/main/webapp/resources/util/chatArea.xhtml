@@ -1,0 +1,169 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"  >
+
+    <composite:interface>
+        <composite:attribute name="startChatButtonValue" default="Start" />
+        <composite:attribute name="stopChatButtonValue" default="Stop"/>
+        <composite:attribute name="sendButtonValue" default="Send"/>
+        <composite:attribute name="chatSessionId" required="true"/>
+        <composite:attribute name="messageFrom" required="true"/>
+        <composite:attribute name="messageTo" required="true" />
+    </composite:interface>
+
+    <composite:implementation>
+        <script>
+            var wsocket;
+            var serviceLocation = "ws://" + document.location.host + "/OnlineDoctorWebApp/chat/";
+            var $room = '';
+            function onMessageReceived(evt) {
+                var msg = JSON.parse(evt.data); // native API
+                var receivedTime = msg.received.substring(11, 16)
+                if ('#{cc.attrs.messageFrom}' === msg.sender) {
+                    var messageLine = '<tr class="sent"><td class="user label">' + msg.sender
+                            + '</td><td class="sentMessage">' + msg.message
+                            + '</td><td class="received">' + receivedTime
+                            + '</td></tr>';
+                } else {
+
+                    var messageLine = '<tr class="received"><td class="user label">' + msg.sender
+                            + '</td><td class="receivedMessage">' + msg.message
+                            + '</td><td class="received">' + receivedTime
+                            + '</td></tr>';
+
+                }
+                var chatWindow = document.getElementById("responses");
+                chatWindow.innerHTML = chatWindow.innerHTML + messageLine;
+                var chatBox = document.getElementById("chatbox");
+                chatBox.scrollTop = chatWindow.scrollHeight;
+            }
+
+            function sendMessage(evt) {               
+                var messageArea = document.getElementById("usermsg");
+                if (messageArea.value === "")
+                    return;
+                var msg = '{"message":"' + messageArea.value + '", "sender":"#{cc.attrs.messageFrom}", "received":""}';
+                wsocket.send(msg);
+                messageArea.value = "";
+                messageArea.focus();
+            }
+
+            function connectToChatserver() {
+                $room = '#{cc.attrs.chatSessionId}';
+                wsocket = new WebSocket(serviceLocation + $room);
+                wsocket.onmessage = onMessageReceived;
+                return true;
+            }
+
+            function leaveRoom() {
+                wsocket.close();
+                document.getElementById("usermsg").disabled = true;
+                document.getElementById("submitmsg").disabled = true;
+                document.getElementById("chat-start").style.visibility = "visible";
+                document.getElementById("leave-chat").style.visibility = "hidden";
+            }
+
+            function startChat(evt) {
+                if (connectToChatserver()) {
+                    document.getElementById("chat-start").style.visibility = "hidden";
+                    document.getElementById("leave-chat").style.visibility = "visible";
+                    document.getElementById("usermsg").disabled = false;
+                    document.getElementById("submitmsg").disabled = false;
+                    document.getElementById("usermsg").focus();
+                } else {
+                    alert("couldn't connect to OnlineDoctor Chat server!");
+                }
+            }
+        </script>
+        <style type="text/css">
+            body {
+                font:12px arial;
+                color: #222;
+                text-align:center;
+                padding:35px; }
+
+            form, p, span {
+                margin:0;
+                padding:0; }
+
+            input { font:12px arial; }
+            a {
+                color:#0000FF;
+                text-decoration:none; }
+            a:hover { text-decoration:underline; }
+            #chat-wrapper, #loginform {
+                margin:0 auto;
+                padding-bottom:25px;
+                background:#EBF4FB;
+                width:574px;
+                border:1px solid #ACD8F0; }
+            #loginform { padding-top:18px; }
+            #loginform p { margin: 5px; }
+            #chatbox {                
+                text-align:left;
+                margin:0 auto;
+                margin-bottom:25px;
+                padding:10px;
+                background:#fff;
+                height:270px;
+                width:500px;
+                border:1px solid #ACD8F0;
+                overflow:auto; }
+            #usermsg {
+                width:465px;
+                border:1px solid #ACD8F0; }
+            #submit { width: 60px; }
+            .error { color: #ff0000; }
+            #menu { padding:12.5px 25px 12.5px 25px; }
+            .welcome { float:left; }
+            .logout { float:right; }
+            .msgln { margin:0 0 2px 0; }
+            #leave-chat{
+                visibility: hidden;
+            }
+            tr.received{
+                width: 490px;
+                color:royalblue;
+                vertical-align: top;
+                text-align: justify;
+            }
+            tr.sent{
+                width: 490px;
+                color: green;
+                vertical-align: top;
+                text-align: justify;
+            }
+            td.sentMessage{                
+                width: 450px;
+            }
+            td.receivedMessage{
+                width: 450px;
+            }
+            .received{
+                width: 15px;
+            }
+
+        </style>
+
+        <div id="chat-wrapper">
+            <div id="menu">
+                <p class="welcome">chatting with #{cc.attrs.messageTo} <b></b></p>
+                <p class="logout"> 
+                    <input type="button" id="chat-start"  value="#{cc.attrs.startChatButtonValue}" onclick="startChat();"  /> 
+                    <input type="button" id="leave-chat" value="#{cc.attrs.stopChatButtonValue}" onclick="leaveRoom()" />
+                </p>    
+                <div style="clear:both"></div>
+            </div>
+
+            <div id="chatbox"  >
+                <table id="responses">
+
+                </table> 
+            </div>
+
+            <input name="usermsg" type="text" id="usermsg" size="63" disabled="true"/>
+            <input name="submitmsg" type="button"  id="submitmsg" value="#{cc.attrs.sendButtonValue}"  onclick="sendMessage()"  disabled="true" />
+
+        </div>
+    </composite:implementation>
+</html>

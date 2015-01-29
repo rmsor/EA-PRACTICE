@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/main_template.xhtml">
+        <ui:define name="body">
+            <h:panelGrid rendered="#{loginManaged.showCreateStudent}">Create Student</h:panelGrid>
+       
+        <h:form id="form">
+            <p:panel header="Personal Details" rendered="#{loginManaged.showCreateStudent}">
+                <h:panelGrid columns="2">
+                    <h:outputText value="FirstName" />
+                    <h:inputText value="#{studentDetails.student.firstName}" />  
+                    <h:outputText value="MiddleName" />
+                    <h:inputText value="#{studentDetails.student.middleName}" />                 
+                    <h:outputText value="LastName" />
+                    <h:inputText value="#{studentDetails.student.lastName}" />
+                    <h:outputText value="Email" />
+                    <h:inputText value="#{studentDetails.student.email}" />
+                    <h:outputText value="Password" />
+                    <h:inputSecret value="#{studentDetails.student.password}" />
+                    <h:outputText value="ContactNumber" />
+                    <h:inputText value="#{studentDetails.student.contactNumber}" />
+                    <f:facet name="footer">
+                        <h:commandButton value="Add" action="#{studentDetails.addStudent()}"/>
+                    </f:facet>
+                </h:panelGrid>    
+                <br/>
+            </p:panel>
+            <br/>
+            <p:growl id="msgs" showDetail="true"/>
+
+            <p:dataTable id="stuents" var="stud" value="#{studentDetails.students}" editable="true" style="margin-bottom:20px"
+            rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15" >
+                <f:facet name="header">
+                    Student Editing
+                </f:facet>
+
+                <p:ajax rendered="#{loginManaged.showCreateStudent}" event="rowEdit" listener="#{studentDetails.onStudentRowEdit}" update=":form:msgs" />
+                <p:ajax rendered="#{loginManaged.showCreateStudent}" event="rowEditCancel" listener="#{studentDetails.onStudentRowCancel}" update=":form:msgs" />
+
+                <p:column headerText="Id">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{stud.id}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{stud.id}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="FIRSTNAME">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{stud.firstName}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{stud.firstName}" style="width:100%" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="LASTNAME">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{stud.lastName}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{stud.lastName}" style="width:100%" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="ContactNumber">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{stud.contactNumber}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{stud.contactNumber}" style="width:100%" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+            </p:dataTable>
+            
+        </h:form>
+        </ui:define>
+        </ui:composition>
+    
+</html>
+

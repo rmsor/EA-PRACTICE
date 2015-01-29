@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Login form</title>
+    </h:head>
+
+    <body>
+          <script type="text/javascript">
+            /**
+             * Faces Validator
+             */
+            PrimeFaces.validator['custom.emailValidator'] = {
+                pattern: /\S+@\S+/,
+                validate: function (element, value) {
+                    //use element.data() to access validation metadata, in this case there is none.
+                    if (!this.pattern.test(value)) {
+                        throw {
+                            summary: 'Validation Error',
+                            detail: value + ' is not a valid email.'
+                        }
+                    }
+                }
+            };
+        </script>
+        
+        
+        
+        <ui:composition>
+
+            <h:form id="form" style="float: right">
+                <p:panel id="panel" header="Create a Customer Account" style="margin-bottom:10px;">
+                    <p:messages id="messages" />
+
+                    <h:panelGrid columns="1" cellpadding="5">
+
+
+                        <p:outputLabel for="firstname" value="First Name:" />
+                        <p:inputText id="firstname" value="#{adminService.customer.firstName}" required="true" label="firstname">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:message for="firstname" />
+
+                        <p:outputLabel for="lastname" value="Last Name:" />
+                        <p:inputText id="lastname" value="#{adminService.customer.lastName}" required="true" label="lastname">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:message for="lastname" />
+
+                        <p:outputLabel for="phonenumber" value="Phone Number:" />
+                        <p:inputMask id="phonenumber" value="#{adminService.customer.contactNumber}" mask="(999) 999-9999"/>
+                        <p:message for="phonenumber" />
+
+                        <h:outputLabel for="email" value="Email:" />
+                        <p:inputText id="email" value="#{adminService.customer.email}">
+                            <f:validator validatorId="custom.emailValidator" />
+                        </p:inputText>
+                        <p:message for="email" display="tooltip" />
+                        <h:outputText value="#{adminService.customer.email}" />
+
+
+                        <p:outputLabel for="image" value="Image:" />
+                        <p:inputText id="image" value="#{adminService.customer.image}" label="Image"/>
+                        <p:message for="image" />
+
+
+                        <p:outputLabel for="dob" value="DOB:" />
+                        <p:calendar id="dob" value="#{adminService.customer.dob}" pattern="dd-MM-yyyy" mask="true" />
+                        <p:message for="dob" />
+
+                        <p:outputLabel for="street" value="Street:" />
+                        <p:inputText id="street" value="#{adminService.customer.address.street}" required="true" label="Street"/>
+                        <p:message for="street" />
+
+                        <p:outputLabel for="city" value="City:" />
+                        <p:inputText id="city" value="#{adminService.customer.address.city}" required="true" label="City"/>
+                        <p:message for="city" />
+
+                        <p:outputLabel for="state" value="State:" />
+                        <p:inputText id="state" value="#{adminService.customer.address.state}" required="true" label="State"/>
+                        <p:message for="state" />
+
+                        <p:outputLabel for="zip" value="Zip:" />
+                        <p:inputText id="zip" value="#{adminService.customer.address.zip}" required="true" label="Zip"/>
+                        <p:message for="zip" />
+
+                        <p:outputLabel for="country" value="Country:" />
+                        <p:inputText id="country" value="#{adminService.customer.address.country}" required="true" label="Country"/>
+                        <p:message for="country" />
+
+                        <p:outputLabel for="username" value="Username:" />
+                        <p:inputText id="username" value="#{adminService.customer.user.username}" required="true" label="Username"/>
+                        <p:message for="username" />
+
+                        <p:outputLabel for="password" value="Password:" />
+                        <p:password id="password" value="#{adminService.customer.user.password}" feedback="true" />
+                        <p:message for="password" />
+
+
+                    </h:panelGrid>
+                    <h:commandButton value="Create a Customer" action="#{adminService.doAddCustomer}">
+                    </h:commandButton>
+
+                    <!--                
+                                    <p:commandButton value="Create Operator" action="" icon="ui-icon-check" validateClient="true"/>
+                                                    <f:ajax execute="@form" render=":operatorlist :errors"/>                    
+                                    <p:commandButton value="Reset" ajax="false" icon="ui-icon-check" validateClient="true"/>-->
+
+                </p:panel>
+
+            </h:form>
+
+
+
+        </ui:composition>
+    </body>
+</html>
+
+

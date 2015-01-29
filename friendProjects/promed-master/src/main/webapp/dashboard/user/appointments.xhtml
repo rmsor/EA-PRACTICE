@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+
+
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">            
+
+
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <h:form>
+                            
+                                <h:commandButton value="Add Appointment" class="btn btn-primary pull-right" action="#{appointmentBean.addAppointment()}"/>
+                            
+                            <h2>Appointments</h2>
+                            
+                            <c:if test="#{message != null}">
+                                <p class="alert alert-success">#{message}</p>
+                            </c:if>
+
+                            
+                                
+                                <h:dataTable class="table-bordered table table-striped" value="#{clientBean.listAppointments()}" var="appointment">
+                                
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Patient Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.patient.fullName}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Doctor Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.doctor.fullName}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Department"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.department.departmentName}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Problems"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.problems}"/>
+                                    </h:column>
+                                    
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.date}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Status"/>
+                                        </f:facet>
+                                        <h:outputText value="#{appointment.status}"/>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Edit"/>
+                                        </f:facet>
+                                        
+                                        <h:commandButton class="btn btn-small" value="View / Update" action="#{appointmentBean.editAppointment(appointment)}"/>
+                                        
+                                    </h:column>
+                                    
+                                    
+                                    
+                                </h:dataTable>
+                                
+                                
+
+
+                            </h:form>  
+
+
+
+                        </div>
+                        
+                    </div>	
+
+                </div>	
+            </div>
+
+
+
+
+
+
+
+
+        </ui:define>
+    </ui:composition>        
+
+</html>  

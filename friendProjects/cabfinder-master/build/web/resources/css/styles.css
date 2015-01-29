@@ -1,0 +1,399 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+    background-image: url(../images/gisfaces-background.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-color: #FFFFFF;
+    margin: 0px;
+}
+
+#header {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0px;
+    height: auto;
+    padding-top: 0px;
+    text-align: center;
+}
+
+.header{
+    padding: 0;
+    margin: 0;
+    font-size: 14pt;
+    color: #990000;
+}
+
+.gisfacesPopupTitleTable{
+    position: absolute;
+    display: block;
+    padding-bottom: 1em;
+}
+
+.titlePane{
+    padding-bottom: 2em;
+}
+
+.log-info{
+    position: relative;
+    display: block;
+    width: 200px;
+    float: right;
+}
+
+#content {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 73px;
+}
+
+h1 {
+    font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #595010;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+h2{
+    color: #A30000;
+}
+
+a {
+    font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4C6C35;
+    text-decoration: none;
+}
+
+a:hover {
+    font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #5A5012;
+    text-decoration: underline;
+}
+
+table {
+    margin: 0px auto;
+    border-spacing: 10px;
+}
+
+.viewsource {
+    visibility: hidden;
+}
+@-moz-document url-prefix() {
+    .viewsource, .viewsource:hover {
+        visibility: visible;
+        font-size: 10px;
+        font-weight: normal;
+    }
+}
+
+/*
+    My Styles
+*/
+
+form.header{
+    position: relative;
+    display: block;
+    width: 400px;
+    margin: 5em auto;
+    border: 0px solid #e4e4e4;
+    border-radius: 4px;
+    padding: 2em;
+}
+
+.title{
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+.header-img{
+    position: relative;
+    display: block;
+    z-index: -1;
+}
+
+a.header-img:hover{
+    border: 1px solid #000;
+}
+
+hr{
+    padding: 0;
+    margin-bottom: 1em;
+    border: 0;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+input[type='text'], input[type='password'], input[type='submit']{
+    height: 30px;
+    border: 1px solid #e4e4e4;
+    border-radius: 2px;
+    padding-left: 5px;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    width: 200px;
+    background: #fff;
+    opacity: 0.9;
+}
+
+input[type='submit']{
+    cursor: pointer;
+    width: 100px;
+    margin: 8px;
+    float: right;
+    margin-right: 0;
+    background: #333300;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #e4e4e4;
+}
+input[type='submit']:hover{
+    background: #474719;
+}
+
+.wrapper{
+    width: 960px;
+    margin: 0 auto;
+    padding: 0;
+}
+.banner-wrapper{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100px;
+    background: #3F434F;
+    margin: 0;
+    padding: 0;
+}
+.geom-wrapper{
+    height: 40px;
+    background: #e4e4e4;
+}
+.geom-wrapper > .banner,  .geom-wrapper > .banner > form{
+    height: 40px;
+    padding: 0;
+}
+.geom-wrapper > .banner > form{
+    float: left;
+}
+div.banner > form#geolocation > input[type='text']{
+    padding: 0;
+    padding-left: 5px;
+    margin: 0;
+    margin-top: 5px;
+    width: 150px;
+}
+div.banner > form#geolocation > a{
+    font-size: 12px;
+}
+.banner{
+    position: relative;
+    display: block;
+    width: 960px;
+    height: 100px;
+    margin: 0 auto;
+}
+.banner-img{
+    float: right;
+}
+h2.heading{
+    position: relative;
+    color: whitesmoke;
+    float: left;
+}
+h2 > img{
+    vertical-align: middle;
+}
+
+.left-nav-wrapper{
+    position: relative;
+    padding-right: 2px;
+    width: 200px;
+    float: left;
+    top: 1em;
+}
+.left-nav > ul{
+    position: relative;
+    left: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+    color: #444;
+}
+.left-nav > ul > li{
+    padding: 0;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 2px;
+    left: 0;
+}
+.left-nav > ul > li > a{
+    text-decoration: none;
+}
+.left-nav > ul > li > a:hover{
+    color: #445;
+}
+.content-wrapper{
+    position: relative;
+    width: 750px;
+    float: right;
+    padding-left: 8px;
+    margin-top: 5px;
+}
+.footer-wrapper{
+    display: block;
+    position: relative;
+    clear: both;
+    border-top: 1px solid #e3e3e3;
+    padding: 4px 0;
+    margin-top: 1em;
+    height: 80px;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0px solid #e7e7e7;
+    width: 100%;
+}
+tr{
+    border-bottom: 1px solid #e4e4e4;
+}
+table > thead > tr > th{
+    top: 5px;
+    bottom: 5px;
+    padding: 5px;
+}
+tr > td > input[type='text'], tr > td > input[type='password']{
+    width: 160px;
+}
+.footer{
+    text-align: left;
+}
+.signup{
+    width: 950px;
+}
+h3, th{
+    color: #A30000;
+}
+h3{
+    background: whitesmoke;
+    padding: 5px;
+    margin-left: -10px;
+}
+.map{
+    position: relative;
+    display: block;
+    height: 100%;
+}
+div#map-setting{
+    position: absolute;
+    display: none;
+    direction: rtl;
+    z-index: 1000;
+    width: 100%;
+}
+.setting-header{
+    font-weight: bold;
+    color: #A30000;
+    background: #d4d4d4;
+    margin: 0;
+    margin-top: 1em;
+}
+div.map-option{
+    position: inherit;
+    background: #e4e4e4;
+    float: right;
+    direction: ltr;
+    width: 150px;
+    z-index: 1001;
+    padding: 5px;
+    top: 10px;
+}
+.toggle{
+    position: relative;
+    z-index: 1002;
+    float: right;
+    direction: rtl;
+    top: 15px;
+}
+.setting{
+    position: relative;
+    display: block;
+    float: right;
+    padding: 0;
+    margin: 0;
+    margin-top: 0.7em;
+    background: url("../resources/img/setup_black.png") no-repeat 0 0;
+    width: 20px;
+    height:20px;
+    cursor: pointer;
+    z-index: 1016;
+}
+.setting > ul{
+    position: absolute;
+    display: none;
+    z-index: 1015;
+    padding: 1em;
+    margin-top: 1.4em;
+    margin-left: -1em; 
+    direction: ltr;
+    list-style-type: none;
+    background: #e4e4e4;
+}
+.setting:hover{
+    background: url("../resources/img/setup_black.png") no-repeat 0 0;
+}
+.setting > ul > li{
+    display: block;
+    width: 100px;
+    border-bottom: 1px solid #a4a4a4;
+    margin-top: 8px;
+    position: relative;
+    direction: rtl;
+    cursor: pointer;
+}
+
+.setting > ul > li > a{
+    text-decoration: none;
+    color: #333;
+    font-weight: normal;
+}
+.setting > ul > li > a:hover{
+    font-weight: bold;
+}
+
+
+
+
+/*
+** Table design css
+*/
+.employeeTable{   
+    border-collapse:collapse;
+    border:1px solid #000000;
+}
+
+.employeeTableHeader{
+    text-align:center;
+    background:none repeat scroll 0 0 #B5B5B5;
+    border-bottom:1px solid #000000;  
+    padding:2px;
+}
+
+.employeeTableOddRow{
+    text-align:center;
+    background:none repeat scroll 0 0 #FFFFFFF;	
+}
+
+.employeeTableEvenRow{
+    text-align:center;
+    background:none repeat scroll 0 0 #D3D3D3;
+}
+

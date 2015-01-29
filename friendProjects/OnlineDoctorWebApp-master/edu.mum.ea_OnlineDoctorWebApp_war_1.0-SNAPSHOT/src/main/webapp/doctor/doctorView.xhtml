@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Doctor View</title>
+    </h:head>
+    <h:body>
+        
+        //content begins here
+        
+        <p:dataTable  var="doctor" value="#{DoctorView.doctors}">
+                <p:column headerText="First Name">                            
+                    <h:outputText style="width: 10em" value="#{doctor.firstName}" />
+                </p:column>                         
+                <p:column headerText="Last Name">                                            
+                    <h:outputText value="#{doctor.lastName}"/>
+                </p:column>
+                <p:column headerText="Date Of Birth">                                            
+                    <h:outputText value="#{doctor.dateofBirth}"/>
+                </p:column> 
+                <p:column headerText="Cell Phone No">                                            
+                    <h:outputText value="#{doctor.cellPhoneNo}"/>
+                </p:column>
+                <p:column headerText="Home Phone No">                                            
+                    <h:outputText value="#{doctor.homePhoneNo}"/>
+                </p:column>
+                <p:column headerText="Work Phone No">                                            
+                    <h:outputText value="#{doctor.workPhoneNo}"/>
+                </p:column> 
+                               
+                <p:column headerText="Medical History">                         
+                    <p:commandButton id="selectButton" update="" oncomplete="" icon="" title="Show Histor">  
+                        
+                    </p:commandButton>                       
+                </p:column>  
+            </p:dataTable>
+       
+        //content ends here
+        
+    </h:body>
+</html>
+

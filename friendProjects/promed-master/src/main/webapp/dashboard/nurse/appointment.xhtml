@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+
+
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">            
+            
+
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="span8">
+
+                            <h2>Appointment</h2>
+
+                            <h:outputLabel class="hello" value="#{message}"/>
+
+                            
+
+                                <h:messages class="errors"/>
+                                <h:form>
+
+                                <h:messages class="errors"/>
+
+
+
+                                <hr/>
+                                <h3>Appointment Info</h3>
+                                <p>
+                                    <h:inputHidden value="#{appointmentBean.appointment.id}"/>
+                                    <h:outputLabel value="Patient:"/>
+                                    <h:selectOneMenu id="patient" value="#{appointmentBean.appointment.patient}">
+                                        <f:selectItems value="#{patientBean.listAllPatients()}" var="patient" itemValue="#{patient}" itemLabel="#{patient.fullName}"/>
+                                        <f:converter converterId="patientConverter"/>
+                                    </h:selectOneMenu>
+                                    <h:message class="error" for="patient"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="Department"/>
+                                    <h:selectOneMenu id="department" value="#{appointmentBean.appointment.department}">
+                                        <f:selectItems value="#{departmentBean.listAllDepartments()}" var="department" itemValue="#{department}" itemLabel="#{department.departmentName}"/>
+                                        <f:converter converterId="departmentConverter"/>
+                                    </h:selectOneMenu>
+                                    <h:message class="error" for="department"/>
+                                </p>
+
+                                <p>
+                                    <h:outputLabel value="Doctor:"/>
+                                    <h:selectOneMenu id="doctor" value="#{appointmentBean.appointment.doctor}" >
+                                        <f:selectItems value="#{doctorBean.listAllDoctors()}" var="doctor" itemValue="#{doctor}" itemLabel="#{doctor.fullName}"/>
+                                        <f:converter converterId="doctorConverter"/>
+                                    </h:selectOneMenu>
+                                    <h:message class="error" for="doctor"/>
+                                </p>
+
+                                <p>
+                                    <h:outputLabel value="Date and Time of Appointment:"/>
+                                    <h:inputText class="input-xxlarge datetimepicker"  label="Date of Appointment" id="appointmentDate" required="true" rendered="true" value="#{appointmentBean.appointment.date}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm" type="both" timeZone="CST" />
+                                    </h:inputText>
+                                    <h:message class="error" for="appointmentDate"/>
+                                </p>
+
+                                <p>
+                                    <h:outputLabel value="Problem Description:"/>
+                                    <h:inputTextarea class="input-xxlarge" label="Problem Description" id="problems" value="#{appointmentBean.appointment.problems}"/><br/>
+                                    <h:message class="error" for="problems"/>
+                                </p>
+
+                                <p>
+                                    <h:outputLabel value="Prescription:"/>
+                                    <h:inputTextarea class="input-xxlarge" label="Prescription" id="prescription" value="#{appointmentBean.appointment.prescription}"/><br/>
+                                    <h:message class="error" for="prescription"/>
+                                </p>
+
+                                <p>
+                                    <h:outputLabel value="Status:">
+                                        <h:selectOneMenu id="status" value="#{appointmentBean.appointment.status}" >
+                                            <f:selectItems value="#{appointmentBean.statuses}" var="status" itemValue="#{status}" itemLabel="#{status}"/>
+                                        </h:selectOneMenu>
+                                    </h:outputLabel>
+                                </p>
+
+
+                            </h:form> 
+
+
+
+                        </div>
+                        <div class="span4">
+
+
+
+
+
+                        </div>	
+                    </div>	
+
+                </div>	
+            </div>
+
+
+
+
+
+
+
+
+        </ui:define>
+    </ui:composition>        
+
+</html>  

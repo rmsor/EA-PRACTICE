@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Login form</title>
+    </h:head>
+
+    <body>
+        <script type="text/javascript">
+            /**
+             * Faces Validator
+             */
+            PrimeFaces.validator['custom.emailValidator'] = {
+                pattern: /\S+@\S+/,
+                validate: function (element, value) {
+                    //use element.data() to access validation metadata, in this case there is none.
+                    if (!this.pattern.test(value)) {
+                        throw {
+                            summary: 'Validation Error',
+                            detail: value + ' is not a valid email.'
+                        }
+                    }
+                }
+            };
+        </script>
+
+
+
+        <ui:composition>
+            <h:form enctype="multipart/form-data" id="form" style="float: left">
+
+
+                <p:panel id="panel" header="Create a Customer Account" style="margin-bottom:10px;">
+
+                    <h:panelGrid columns="1" cellpadding="5">
+
+                        <p:outputLabel for="firstname" value="First Name:" />
+                        <p:inputText id="firstname" value="#{registrationService.customer.firstName}" required="true" label="firstname">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:message for="firstname" />
+
+                        <p:outputLabel for="lastname" value="Last Name:" />
+                        <p:inputText id="lastname" value="#{registrationService.customer.lastName}" required="true" label="lastname">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:message for="lastname" />
+
+                        <p:outputLabel for="phonenumber" value="Phone Number:" />
+                        <p:inputMask id="phonenumber" value="#{registrationService.customer.contactNumber}" required="true" mask="(999) 999-9999"/>
+                        <p:message for="phonenumber" />
+
+                        <h:outputLabel for="email" value="Email:" />
+                        <p:inputText id="email" value="#{registrationService.customer.email}" required="true">
+                            <f:validator validatorId="custom.emailValidator" />
+                        </p:inputText>
+                        <p:message for="email" display="tooltip" />
+                        <h:outputText value="#{registrationService.customer.email}" />
+
+                        <p:outputLabel for="username" value="Username:" />
+                        <p:inputText id="username" value="#{registrationService.customer.user.username}" required="true" label="Username"/>
+                        <p:message for="username" />
+
+                        <p:outputLabel for="password" value="Password:" />
+                        <p:password id="password" value="#{registrationService.customer.user.password}" required="true" feedback="true" />
+                        <p:message for="password" />
+
+
+                    </h:panelGrid>
+                    <h:commandButton value="Register" action="#{registrationService.doAddCustomer}">
+                    </h:commandButton>
+
+                </p:panel>
+
+            </h:form>
+
+
+
+        </ui:composition>
+    </body>
+</html>
+
+

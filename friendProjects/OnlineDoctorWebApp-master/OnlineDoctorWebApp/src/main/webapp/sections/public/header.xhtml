@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head><title>IGNORED</title></head>
+    <body>
+        <ui:composition>
+            <!--start header-->
+            <div class="header">
+                <div class="top-header">
+                    <div class="wrap">
+                        <div class="top-header-left">
+                            <p>+800-020-12345</p>
+                        </div>
+                        <div class="right-left">
+                            <ul>
+                                <li class="login">
+                                    <h:form rendered="#{!loginBean.isLoggedIn}">
+                                    <h:link outcome="login.faces" value="Login" />
+                                    </h:form>
+                                </li>
+                               
+                                <li class="sign">
+                                    <h:form rendered="#{!loginBean.isLoggedIn}">
+                                    <h:link outcome="signup.faces" value="Sign up" />
+                                    </h:form>
+                                    </li>
+                                
+                                <li class="welcome">                                
+                                    <h:form rendered="#{loginBean.isLoggedIn}">
+                                        <h:outputLabel  value="Hello #{loginBean.currentUser.firstName} "  />                             
+                                </h:form>
+                            </li>
+                                
+                                <li class="login">
+                                    <h:form rendered="#{loginBean.isLoggedIn}">
+                                     <h:commandLink value="Logout" action="#{loginBean.logout}" />
+                                    </h:form>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="clear"> </div>
+                    </div>
+                </div>
+                <div class="main-header">
+                    <div class="wrap">
+                        <div class="logo">
+                            <a href="public/index.html"><img src="../resources/images/logo.png" title="logo" /></a>
+                        </div>
+                        <div class="social-links">
+                            <ul>
+                                <li><a href="#"><img src="../resources/images/facebook.png" title="facebook" /></a></li>
+                                <li><a href="#"><img src="../resources/images/twitter.png" title="twitter" /></a></li>
+                                <li><a href="#"><img src="../resources/images/feed.png" title="Rss" /></a></li>
+                                <div class="clear"> </div>
+                            </ul>
+                        </div>
+                        <div class="clear"> </div>
+                    </div>
+                </div>
+                <div class="clear"> </div>
+                <div class="top-nav">
+                    <div class="wrap">
+                        <ul>
+                            <li class="active"><h:link outcome="/home.faces" value="Home"/></li>
+                            <li><h:link outcome="/public/about.faces" value="About" /></li>
+                            <li><h:link outcome="/public/services.faces" value="Services"/></li>
+                            <li><h:link outcome="/public/news.faces" value="News" /></li>
+                            <li><h:link outcome="/public/contact.faces" value="Contact" /></li>
+                            <div class="clear"> </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!---End header-->
+            <!--             <h:form class="logout"><h:commandButton value="Log out" action=""/></h:form>-->
+        </ui:composition>
+    </body>
+</html>

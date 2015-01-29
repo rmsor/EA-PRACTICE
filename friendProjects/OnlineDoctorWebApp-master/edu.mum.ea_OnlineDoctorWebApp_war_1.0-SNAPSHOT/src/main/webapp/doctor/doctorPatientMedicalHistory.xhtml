@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Doctor Account</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            //content begins here
+            <ui:define name="content"> 
+                <p:accordionPanel multiple="true">
+                    <p:tab title="Patient Info">
+                        <h:panelGrid columns="6" cellpadding="10">
+                            <p:spacer></p:spacer> 
+                            <p:spacer></p:spacer>
+                            <h:outputLabel for="firstname" value="First Name :" />
+                            <h:outputText id="firstname" value="#{patientBean.patient.firstName}"/>
+                            <h:outputLabel for="lastname" value="Last Name :" />
+                            <h:outputText id="lastname" value="#{patientBean.patient.firstName}"/>
+
+                            <p:spacer></p:spacer>
+                            <p:spacer></p:spacer>
+                            <h:outputLabel for="dob" value="Date of Birth :" />
+                            <h:outputText id="dob" value="#{patientBean.patient.dateofBirth}"/>
+                            <h:outputLabel for="gender" value="Gender :" />
+                            <h:outputText id="gender" value="#{patientBean.patient.gender}"/>
+
+                            <p:spacer></p:spacer>
+                            <p:spacer></p:spacer>
+                            <h:outputLabel for="cellPhone" value="Cell Phone:" />
+                            <h:outputText id="cellPhone" value="#{patientBean.patient.cellPhoneNo}"/>
+                            <h:outputLabel for="email" value="Email:" />
+                            <h:outputText id="email" value="#{patientBean.patient.email}"/>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Medical Records">
+                        <p:dataScroller  value="#{doctorViewMedicalHistory.records}" var="medicalRecord" chunkSize="10" mode="inline" scrollHeight="500">
+                            <f:facet name="header">
+                                Scroll Down to see old records
+                            </f:facet>
+                            <f:facet name="tableheader">
+                                <h:panelGrid columns="5" cellpadding="5">
+                                    <h:outputText value="Date" />
+                                    <h:outputText value="Symptoms" />
+                                    <h:outputText value="Remark" />
+                                    <h:outputText value="Doctor" />
+                                    <h:outputText value="Remedies" />                                        
+                                </h:panelGrid>
+                            </f:facet>
+                            <h:panelGrid columns="5" style="width:100%" columnClasses="date,symptoms, remarks">
+                                <h:outputText value="#{medicalRecord.recordDate}" style="font-weight: bold"/>
+                                <h:outputText value="#{medicalRecord.symptoms}" style="font-weight: bold"/>
+                                <h:outputText value="#{medicalRecord.remarks}" style="font-weight: bold"/>
+                                <h:outputText value="#{medicalRecord.doctor.firstName}" style="font-weight: bold"/>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:commandButton update=":form:remediesDetail" oncomplete="PF('remediesOP').show('#{component.clientId}')" icon="ui-icon-search" title="View">
+                                        <f:setPropertyActionListener value="#{medicalRecord}" target="#{dtSelectionView.selectedMedicalRecord}" />
+                                    </p:commandButton>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </p:dataScroller>
+                        <p:overlayPanel widgetVar="remediesOP" showEffect="fade" hideEffect="fade" dismissable="false" showCloseIcon="true">
+                            <p:outputPanel id="remediesDetail" style="text-align:center;">
+                                <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
+                                    <f:facet name="header">
+                                        <p:graphicImage name="demo/images/car/#{dtSelectionView.selectedCar.brand}-big.gif"/>
+                                    </f:facet>
+
+                                    <h:outputText value="Id:" />
+                                    <h:outputText value="#{dtSelectionView.selectedCar.id}" />
+
+                                    <h:outputText value="Year" />
+                                    <h:outputText value="#{dtSelectionView.selectedCar.year}" />
+
+                                    <h:outputText value="Color:" />
+                                    <h:outputText value="#{dtSelectionView.selectedCar.color}" style="color:#{dtSelectionView.selectedCar.color}"/>
+
+                                    <h:outputText value="Price" />
+                                    <h:outputText value="$#{dtSelectionView.selectedCar.price}" />
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:overlayPanel>
+                    </p:tab>
+                    <p:tab title="Godfather Part III">
+                        <h:panelGrid columns="1" cellpadding="10">
+                           
+                            <h:outputText value="After a break of more than 15 years...." />
+                        </h:panelGrid>
+                    </p:tab>
+                </p:accordionPanel>
+            </ui:define>
+            //content ends here
+        </ui:composition>
+    </h:body>
+</html>
+

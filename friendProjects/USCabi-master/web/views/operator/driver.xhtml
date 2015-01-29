@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Driver</title>
+    </h:head>
+    <h:body>
+
+
+        <script type="text/javascript">
+            /**
+             * Faces Validator
+             */
+            PrimeFaces.validator['custom.emailValidator'] = {
+                pattern: /\S+@\S+/,
+                validate: function (element, value) {
+                    //use element.data() to access validation metadata, in this case there is none.
+                    if (!this.pattern.test(value)) {
+                        throw {
+                            summary: 'Validation Error',
+                            detail: value + ' is not a valid email.'
+                        }
+                    }
+                }
+            };
+        </script>
+
+
+
+
+        <h:form id="form">
+            <p:panel id="panel">
+                <h3 style="background-color: #f5f5f5; padding: 5px 0px 8px 2px; margin-top: 0px;">Add Driver</h3>
+
+                <p:messages id="messages" />
+
+                <h:panelGrid columns="1" cellpadding="5">
+
+
+                    <p:outputLabel for="firstname" value="First Name:" />
+                    <p:inputText id="firstname" value="#{operatorService.driver.firstName}" required="true" label="firstname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="firstname" />
+
+                    <p:outputLabel for="lastname" value="Last Name:" />
+                    <p:inputText id="lastname" value="#{operatorService.driver.lastName}" required="true" label="lastname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="lastname" />
+
+                    <p:outputLabel for="phonenumber" value="Phone Number:" />
+                    <p:inputMask id="phonenumber" value="#{operatorService.driver.contactNumber}" mask="(999) 999-9999"/>
+                    <p:message for="phonenumber" />
+
+                    <h:outputLabel for="email" value="Email:" />
+                    <p:inputText id="email" value="#{operatorService.driver.email}">
+                        <f:validator validatorId="custom.emailValidator" />
+                    </p:inputText>
+                    <p:message for="email" display="tooltip" />
+                    <h:outputText value="#{operatorService.driver.email}" />
+
+
+                    <p:outputLabel for="image" value="Image:" />
+                    <p:inputText id="image" value="#{operatorService.driver.image}" label="Image"/>
+                    <p:message for="image" />
+
+
+                    <p:outputLabel for="dob" value="DOB:" />
+                    <p:calendar id="dob" value="#{operatorService.driver.dob}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="dob" />
+
+
+                    <p:outputLabel for="street" value="Street:" />
+                    <p:inputText id="street" value="#{operatorService.driver.address.street}" required="true" label="Street"/>
+                    <p:message for="street" />
+
+
+                    <p:outputLabel for="city" value="City:" />
+                    <p:inputText id="city" value="#{operatorService.driver.address.city}" required="true" label="City"/>
+                    <p:message for="city" />
+
+
+                    <p:outputLabel for="state" value="State:" />
+                    <p:inputText id="state" value="#{operatorService.driver.address.state}" required="true" label="State"/>
+                    <p:message for="state" />
+
+                    <p:outputLabel for="zip" value="Zip:" />
+                    <p:inputText id="zip" value="#{operatorService.driver.address.zip}" required="true" label="Zip"/>
+                    <p:message for="zip" />
+
+                    <p:outputLabel for="country" value="Country:" />
+                    <p:inputText id="country" value="#{operatorService.driver.address.country}" required="true" label="Country"/>
+                    <p:message for="country" />
+
+                    <p:outputLabel for="username" value="Username:" />
+                    <p:inputText id="username" value="#{operatorService.driver.user.username}" required="true" label="Username"/>
+                    <p:message for="username" />
+
+                    <p:outputLabel for="password" value="Password:" />
+                    <p:password id="password" value="#{operatorService.driver.user.password}" feedback="true" />
+                    <p:message for="password" />
+
+
+                    <p:outputLabel for="drivingLicenseNo" value="Driving License No:" />
+                    <p:inputText id="drivingLicenseNo" value="#{operatorService.driver.drivingLicenseNo}" required="true" label="drivingLicenseNo">
+                        <f:validateLength minimum="5" />
+                    </p:inputText>
+                    <p:message for="drivingLicenseNo" />
+
+                    <p:outputLabel for="licenseExpireDate" value="License Expire Date:" />
+                    <p:calendar id="licenseExpireDate" value="#{operatorService.driver.licenseExpireDate}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="licenseExpireDate" />
+
+
+                    <p:outputLabel for="registerCouncil" value="Register Council:" />
+                    <p:inputText id="registerCouncil" value="#{operatorService.driver.registerCouncil}" required="true" label="registerCouncil">
+                        <f:validateLength minimum="5" />
+                    </p:inputText>
+                    <p:message for="registerCouncil" />
+
+
+                    <p:outputLabel for="badgeLicenseNo" value="Badge License No:" />
+                    <p:inputText id="badgeLicenseNo" value="#{operatorService.driver.badgeLicenseNo}" required="true" label="badgeLicenseNo">
+                        <f:validateLength minimum="5" />
+                    </p:inputText>
+                    <p:message for="badgeLicenseNo" />
+
+
+                    <p:outputLabel for="badgeExpireDate" value="Badge Expire Date:" />
+                    <p:calendar id="badgeExpireDate" value="#{operatorService.driver.badgeExpireDate}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="badgeExpireDate" />
+
+
+                    <p:outputLabel for="publicLiabilityInsuranceRenewalDate" value="Public Liability Insurance Renewal Date:" />
+                    <p:calendar id="publicLiabilityInsuranceRenewalDate" value="#{operatorService.driver.publicLiabilityInsuranceRenewalDate}" pattern="dd-MM-yyyy" mask="true" />
+                    <p:message for="publicLiabilityInsuranceRenewalDate" />
+
+
+                    <p:outputLabel for="driverStatus" value="Driver Status:" />
+                    <p:inputText id="driverStatus" value="#{operatorService.driver.driverStatus}" required="true" label="driverStatus">
+                        <f:validateLength minimum="5" />
+                    </p:inputText>
+                    <p:message for="driverStatus" />
+
+
+                </h:panelGrid>
+                <h:commandButton value="Create a Driver" action="#{operatorService.doAddDriver}">
+                </h:commandButton>
+
+                <!--                
+                                <p:commandButton value="Create Operator" action="" icon="ui-icon-check" validateClient="true"/>
+                                                <f:ajax execute="@form" render=":operatorlist :errors"/>                    
+                                <p:commandButton value="Reset" ajax="false" icon="ui-icon-check" validateClient="true"/>-->
+
+            </p:panel>
+
+        </h:form>
+
+
+        <h:form>
+            <p:dataTable id="driverlist" var="driver" value="#{operatorService.doFindAllDriver()}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                <p:column headerText="Username">
+                    <h:outputText value="#{driver.user.username}" />
+                </p:column>
+
+                <p:column headerText="Driver Name">
+                    <h:outputText value="#{driver.lastName}" />
+                </p:column>
+
+                <p:column headerText="Email">
+                    <h:outputText value="#{driver.email}" />
+                </p:column>
+
+                <p:column headerText="Contact Number">
+                    <h:outputText value="#{driver.contactNumber}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="/template/template.xhtml">
+
+    <ui:define name="metadata">
+
+    </ui:define>
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl showDetail="true"/>
+
+            <p:dataTable var="emp" value="#{adminController.admin.firstName}" editable="true" style="margin-bottom:20px">
+                <f:facet name="header">
+                    Admin Manage Users
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdi}" update="" />
+                <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update="" />
+
+                <p:column headerText="ID">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{adminController.admin.id}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{adminController.admin.id}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="First Name">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{adminController.admin.firstName}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{adminController.admin.firstName}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Last Name">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{adminController.admin.lastname}"></h:outputText></f:facet>
+                        <f:facet name="input"><p:inputText value="#{adminController.admin.lastname}"></p:inputText></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Birth Date">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{adminController.admin.birthDate}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{adminController.admin.birthDate}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Gender">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{adminController.admin.gender}" /></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{adminController.admin.gender}" style="width:100%">
+                                <f:selectItems value="#{adminController.admin.gender}" var="man" itemLabel="Male" itemValue="Female" />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

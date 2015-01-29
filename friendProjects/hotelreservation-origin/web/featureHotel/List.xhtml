@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListFeatureHotelTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form id="form" styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListFeatureHotelEmpty}" rendered="#{featureHotelController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{featureHotelController.items.rowCount > 0}">
+                    <h:outputText value="#{featureHotelController.pagination.pageFirstItem + 1}..#{featureHotelController.pagination.pageLastItem + 1}/#{featureHotelController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{featureHotelController.previous}" value="#{bundle.Previous} #{featureHotelController.pagination.pageSize}" rendered="#{featureHotelController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{featureHotelController.next}" value="#{bundle.Next} #{featureHotelController.pagination.pageSize}" rendered="#{featureHotelController.pagination.hasNextPage}"/>&nbsp;
+                   
+                    <p:growl id="msgs" showDetail="true"/>
+                    <p:dataTable value="#{featureHotelController.items}" var="item" editable="true" style="margin-bottom:20px">
+                        <f:facet name="header">
+                            Hotel Feature
+                        </f:facet>
+                        <p:ajax event="rowEdit" listener="#{featureHotelController.onRowEdit}" update=":form:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{featureHotelController.onRowCancel}" update=":form:msgs" />
+ 
+                        <p:column headerText="ID" style="width:64px">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.id}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.id}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Type" style="width:64px">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.feature_type}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.feature_type}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Discription" style="width:64px">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.discription}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.discription}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+                         <p:column style="width:60px">
+                            
+                            <p:commandButton icon="ui-icon-close"
+                                             title="Delete this hotel"
+                                             actionListener="#{featureHotelController.destroy}"
+                                             ajax="false" />
+                        </p:column>
+                    </p:dataTable>
+                   
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{featureHotelController.prepareCreate}" value="#{bundle.ListFeatureHotelCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListFeatureHotelIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

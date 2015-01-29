@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>List of Hotels</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/masterLayout.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="hotel-list">
+                        <div class="hotel-list-content">
+                            <ui:repeat value="#{roomBookingController.hotels}" var="item">
+
+                                <div class="hotel_list">
+                                    <div class="hotel_image">
+
+                                        <ui:repeat value="#{pictureController.getHotelPictures(item)}" var="picture" rendered="#{not empty pictureController.getHotelPictures(item)}" size="1">
+                                            <h:graphicImage value="../#{picture.path}" width="300" height="160" />
+                                        </ui:repeat>
+                                        <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty pictureController.getHotelPictures(item)}" />
+                                    </div>
+                                    <div class="hotel_info">
+
+                                        <span id="hotel_name">
+                                            <h:commandLink id="hotelLink" value="#{item.name}" 
+                                                           action="#{roomBookingController.findHotelById(item.id)}" />
+                                        </span>
+                                        <div class="hotel_info_location">
+                                            <div class="hotel_info_address">
+                                                <h:outputText value="#{item.address.street}"/><br/>
+                                                <h:outputText value="#{item.address.city}" />,
+                                                <h:outputText value="#{item.address.province}" />,
+                                                <h:outputText value="#{item.address.zipCode}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="hotel_info_review">
+                                             <h:commandLink action="#{hotelController.findHotel(item)}">
+                                            <p id="reveStarImg">
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate>=1}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate>=2}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==1 or item.rate==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate>=3}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==2 or item.rate==1 or item.rate==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate>=4}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==3 or item.rate==2 or item.rate==1 or item.rate==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate==5}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==4 or item.rate==3 or item.rate==2 or item.rate==1 or item.rate==0}"/>
+                                               
+                                            </p>
+                                                <p id="hoteRate">#{item.reviews.size()}</p>
+                                            verified customer reviews
+                                            </h:commandLink>
+                                        </div>
+
+
+
+                                        <div class="hotel_info_book_button">
+                                            <p:commandButton id="myButton" 
+                                                             action="#{roomBookingController.findHotelById(item.id)}" 
+                                                             value="Select"/>
+                                        </div>
+                                    </div>
+                                    <div class="clear-both"></div>
+                                </div>
+                                <hr></hr>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>
+            var wsocket;
+            var serviceLocation = "ws://" + document.location.host + "/ChatRoomTest/chat/";
+            var username;//$username;
+            var $message;
+            var $chatWindow;
+            var room = '';
+
+            function onMessageReceived(evt) {
+                //var msg = eval('(' + evt.data + ')');
+                var msg = JSON.parse(evt.data); // native API
+                var $messageLine = $('<tr><td class="received">' + msg.received
+                        + '</td><td class="user label label-info">' + msg.sender
+                        + '</td><td class="message badge">' + msg.message
+                        + '</td></tr>');
+                $chatWindow.append($messageLine);
+            }
+            function sendMessage() {
+                var msg = '{"message":"' + $message.val() + '", "sender":"'
+                        + username + '", "received":""}';
+                wsocket.send(msg);
+                $message.val('').focus();
+            }
+
+            function connectToChatserver() {
+           
+                room = $('#chatForm\\:availableAppointments').val() ;//+ '_#{talkToPatientBean.selectedAppointment.patientInAppointment.userName}_#{talkToPatientBean.selectedAppointment.doctor.userName}';
+              
+                wsocket = new WebSocket(serviceLocation + room);
+                wsocket.onmessage = onMessageReceived;
+            }
+
+            function leaveRoom() {
+                wsocket.close();
+                $chatWindow.empty();
+                $('.chat-wrapper').hide();
+                $('.chat-signin').show();
+                // $username.focus();
+            }
+
+            $(document).ready(function() {
+                username = '#{talkToPatientBean.doctor.userName}';//$('#chatForm\\:username');
+                $message = $('#do-chat\\:message');//document.getElementById('do-chat:message').value;//
+                $chatWindow = $('#response');
+                $('.chat-wrapper').hide();
+                // $username.focus();
+
+                $('#chatForm\\:enterRoom').click(function(evt) {
+                    evt.preventDefault();
+                    connectToChatserver();
+                    $('.chat-wrapper h2').text(room + 'Online Doctor : Live chat between #{talkToPatientBean.selectedAppointment.patientInAppointment.firstName} and Dr. #{talkToPatientBean.selectedAppointment.doctor.firstName}' );
+                    $('.chat-signin').hide();
+                    $('.chat-wrapper').show();
+                    $message.focus();
+                });
+                $('#do-chat').submit(function(evt) {
+                    evt.preventDefault();
+                    sendMessage()
+                });
+
+                $('#leave-room').click(function() {
+                    leaveRoom();
+                });
+            });
+        </script>
+    </h:head>
+
+    <h:body>
+
+        <div class="container chat-signin">
+            <h:form id="chatForm" class="form-signin">
+
+                <h2 class="form-signin-heading">Chat sign in</h2>
+            
+                <br/>
+                Select appointment
+                <h:selectOneMenu id="availableAppointments" value="#{talkToPatientBean.selectedAppointmentID}">
+                    <f:selectItems value="#{talkToPatientBean.appointments}" var="appointment" itemValue="#{appointment.id}" 
+                                   itemLabel="#{appointment.id} With Dr.#{appointment.doctorInAppointment.firstName} #{appointment.doctorInAppointment.lastName}
+                                   #{appointment.appointmentDate}" />
+                    <f:ajax event="change"   render="enterRoom" listener="#{talkToPatientBean.getAppointmentByID}" /> 
+                </h:selectOneMenu>
+
+
+                <h:commandButton class="btn btn-large btn-primary" type="submit" 
+                                 id="enterRoom" value="Start" />
+            </h:form>
+        </div>
+     
+        <div class="container chat-wrapper">
+            <h:form id="do-chat">
+                Hi <h:outputLabel value="#{talkToPatientBean.doctor.firstName}" />
+                <h2 class="alert alert-success"></h2>
+                <fieldset style="width:500px">
+                    <table id="response" class="table table-bordered"></table>
+
+                </fieldset>
+                <fieldset style="width:500px">
+                    <legend>Enter your message</legend>
+                    <div class="controls">
+                        <h:inputText  class="input-block-level"  id="message" style="width:300px"/>
+                        <br/>
+
+                        <input type="submit" class="btn btn-large btn-block btn-primary"
+                               value="Send message"  />
+
+                        <button class="btn btn-large btn-block" type="button" id="leave-room">Leave
+                            room</button>
+                    </div>
+                </fieldset>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

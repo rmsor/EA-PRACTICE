@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition>
+            <h:form>
+                <p:menu>
+                    <p:submenu label="Main Menu">
+                        <p:menuitem value="Profile" actionListener="#{CustomerService.manageProfile}" update="" ajax="false"/>
+                        <p:menuitem value="Create Booking" actionListener="#{CustomerService.createBooking}" update="" ajax="false" />
+                        <p:menuitem value="Booking History" actionListener="#{CustomerService.bookingHistory}" update="" ajax="false"/>
+                        <p:menuitem value="Check Nearest Driver" actionListener="#{CustomerService.nearestDriver}" update="" ajax="false"/>
+                        
+                    </p:submenu>
+                </p:menu>
+            </h:form>
+        </ui:composition>
+    </body>
+</html>
+

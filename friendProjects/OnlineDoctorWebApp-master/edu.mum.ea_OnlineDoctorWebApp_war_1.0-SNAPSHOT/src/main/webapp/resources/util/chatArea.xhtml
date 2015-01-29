@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <composite:interface>
+        <composite:attribute name="chatHistoryValue" />
+        <composite:attribute name="sendtextvalue"/>
+        <composite:attribute name="sendAction" />
+        
+    </composite:interface>
+
+    <composite:implementation>
+        <h:outputScript name="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>
+        <h:outputScript name="js/chatScript.js" />
+        
+        <p:button id="chat-start" />
+        <div id="chat-wrapper" class="container chat-signin">
+            <h:form id="do-chat" class="form-chat">
+                <p:inputTextarea id="response" rows="6" cols="33" value="#{cc.attrs.chatHistoryValue}" readonly="true"/><br /><br />
+                <p:inputText id="message" value="#{cc.attrs.sendtextvalue}"/><br /><br />
+                <p:commandButton id="sendButton" />
+                <p:button id="leave-chat"/>
+                
+            </h:form>
+        </div>
+    </composite:implementation>
+</html>

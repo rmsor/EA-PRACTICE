@@ -1,0 +1,43 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 26, 2014, 4:32:17 PM
+    Author     : fjoseph1313
+*/
+
+.columnHeader{
+    
+}
+.categoryOddRow{
+    text-align:center;
+    background:none repeat scroll 0 0 #dddda7;	
+    color : #000;
+}
+
+.categoryEvenRow{
+    text-align:center;
+    background:none repeat scroll 0 0 #D3D3D3;
+}
+.error{
+    font-weight: bold;
+    color: red;
+}
+fieldset {
+    margin: 0 0 10px 0;
+    border: 2px outset gray;
+    border-radius: 10px;
+}
+input[type="submit"] {
+    background-color: #FAA;
+    font-size: 120%;
+    font-weight: bold;
+}
+legend {
+    
+    border: 2px outset gray;
+    padding: 0.2em;
+}
+

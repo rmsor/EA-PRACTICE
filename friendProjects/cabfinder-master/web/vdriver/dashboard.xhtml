@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="../template/default.xhtml">
+        <ui:define name="title">Cab Finder - Driver Dashboard</ui:define>
+
+        <ui:define name="content">
+            <h:head><h3>Driver &rsaquo; Dashboard</h3></h:head>
+            <h:form>
+                <h:dataTable value="#{driverController.driver.location}" var="driver" 
+                             styleClass="employeeTable"
+                             headerClass="employeeTableHeader"
+                             rowClasses="employeeTableOddRow,employeeTableEvenRow">
+                    <h:column>    				
+                        <f:facet name="header">ID</f:facet>    				
+                            #{driver.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Street</f:facet>
+                            #{driver.street}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Longitude</f:facet>
+                            #{driver.lon}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Latitude</f:facet>
+                            #{driver.lat}
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

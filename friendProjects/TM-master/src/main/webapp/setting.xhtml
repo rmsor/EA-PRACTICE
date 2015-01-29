@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/main_template.xhtml">
+        <ui:define name="body">
+
+            
+
+
+            <h:form >         
+                <p:tabView>
+                    <p:tab title="Email Setting">
+
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputText value=""/>
+                            <h:outputText style="color: #0099ff;" value="#{tMSetting.showMessage}"/>
+                            <h:outputText value="Subject" />
+                            <h:inputText value="#{tMSetting.email.subject}" />
+                            <h:outputText value="Message" />
+                            <h:inputTextarea value="#{tMSetting.email.message}"  />
+                            <h:commandButton value="Update" action="#{tMSetting.updateEmailInfo()}"/>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Total TM Checking">
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Total TM Checking" />
+                            <h:inputText value="#{tMSetting.totalTMChecking}" />  
+                        </h:panelGrid>
+
+                        <h:commandButton value="Add" action="#{tMSetting.settingValues()}"/>
+                    </p:tab>
+                   
+                </p:tabView>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>
+

@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+
+
+    <ui:composition template="/templates/default/main.xhtml">
+        <ui:define name="content">            
+            <c:if test="#{param['id'] != null}">
+                <f:event type="preRenderView" listener="#{nurseBean.editNurse(param['id'])}" />
+            </c:if>
+
+
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="span8">
+
+                            <h2>Nurse</h2>
+
+                            <c:if test="#{message != null}">
+                                <p class="alert alert-success">#{message}</p>
+                            </c:if>
+
+
+                            <h:form>
+
+                                <h:messages class="errors"/>
+
+
+                                <p>
+                                    <h:outputLabel value="Department:"/>
+                                    <h:selectOneMenu value="#{nurseBean.nurse.department}">
+                                        <f:selectItems value="#{departmentBean.listAllDepartments()}" var="department" itemValue="#{department}" itemLabel="#{department.departmentName}"/>
+                                        <f:converter converterId="departmentConverter"/>
+                                    </h:selectOneMenu>
+                                </p>
+
+                                <c:if test="#{param['id'] == null}">
+
+                                    <p>
+                                        <h:outputLabel value="Email:"/>
+                                        <h:inputText id="email" required="true" validatorMessage="Invalid email address." label="Email" class="input-xxlarge" rendered="true" value="#{nurseBean.nurse.user.email}">
+                                            <f:validateRegex pattern="^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$"/>
+                                        </h:inputText> 
+                                        <h:message class="error" for="email"/>
+                                    </p>
+
+                                    <p>
+                                        <h:outputLabel value="Username:"/>
+                                        <h:inputText id="username" required="true" validatorMessage="User Name Not Valid" class="input-xxlarge" label="User Name:" rendered="true" value="#{nurseBean.nurse.user.username}">
+                                            <f:validateLength minimum="4" maximum="10" />
+                                            <f:validator validatorId="userValidator"/>
+                                        </h:inputText>
+                                        <h:message class="error" for="username"/>
+                                    </p>
+
+                                    <hr/>
+
+                                </c:if>
+
+                                <h3>Nurse Info</h3>
+                                <p>
+
+                                    <h:outputLabel value="First Name:"/>
+                                    <h:inputText class="input-xxlarge" label="First Name" id="firstName" required="true" rendered="true" value="#{nurseBean.nurse.firstName}"/><br/>
+                                    <h:message class="error" for="firstName"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="Last Name:"/>
+                                    <h:inputText class="input-xxlarge" label="Last Name" id="lastName" required="true" rendered="true" value="#{nurseBean.nurse.lastName}"/><br/>
+                                    <h:message class="error" for="lastName"/>
+                                </p>
+                                <hr/>
+                                <p>
+                                    <h:outputLabel value="Phone:"/>
+                                    <h:inputText class="input-xxlarge" label="Phone" id="phone" value="#{nurseBean.nurse.phone}"/>
+                                    <h:message class="error" for="phone"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="Mobile:"/>
+                                    <h:inputText class="input-xxlarge" label="Mobile" id="mobile" value="#{nurseBean.nurse.mobile}"/>
+                                    <h:message class="error" for="mobile"/>
+                                </p>
+                                <hr/>
+                                <h3>Address:</h3>
+                                <p>
+                                    <h:outputLabel value="Street:"/>
+                                    <h:inputText class="input-xxlarge" label="Street" id="street" value="#{nurseBean.nurse.street}"/>
+                                    <h:message class="error" for="street"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="City:"/>
+                                    <h:inputText class="input-xxlarge" label="City" id="city" value="#{nurseBean.nurse.city}"/>
+                                    <h:message class="error" for="city"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="State:"/>
+                                    <h:inputText class="input-xxlarge" label="State" id="state" value="#{nurseBean.nurse.stateName}"/>
+                                    <h:message class="error" for="state"/>
+                                </p>
+                                <p>
+                                    <h:outputLabel value="Zip:"/>
+                                    <h:inputText class="input-xxlarge" label="Zip" id="zip" value="#{nurseBean.nurse.zipCode}"/>
+                                    <h:message class="error" for="zip"/>
+                                </p>
+
+
+                                <h:inputHidden value="#{nurseBean.nurse.id}"/>
+
+
+                                <p>
+                                    <h:commandButton class="btn btn-primary" action="#{nurseBean.createNurse()}" value="Submit"/>
+                                </p>
+                            </h:form>  
+
+
+
+                        </div>
+                        <div class="span4">
+
+
+
+
+
+                        </div>	
+                    </div>	
+
+                </div>	
+            </div>
+
+
+
+
+
+
+
+
+        </ui:define>
+    </ui:composition>        
+
+</html>  

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:form  id="editPatientInfo">
+
+            <h:panelGrid columns="3" cellpadding="6">
+                <p:commandLink value="Change my password" action="changePassword"/> 
+                <p:commandLink value="Edit my address" action="editAddress"/>
+                <br/>
+
+
+                <p:outputLabel for="street" value="Street" ></p:outputLabel>
+
+                <p:inputText id="street" value="#{patientBean.patient.address.street}"/>
+
+                <p:message for="street" id="streetError" style="color: red"/>
+                <p:outputLabel for="city" value="City:"/>
+                <p:inplace>
+                    <p:inputText id="city" value="#{patientBean.patient.address.city}"/>
+                </p:inplace>
+                <p:message for="city" id="cityError" style="color: red"/>
+                <p:outputLabel for="state" value="State:" />
+                <p:inplace>
+                    <p:inputText id="state" value="#{patientBean.patient.address.state}"/></p:inplace>
+                <p:message for="state" id="stateError" style="color: red"/>
+                <p:outputLabel for="zipCode" value="Zip Code:" />
+                <p:inplace> <p:inputText id="zipCode" value="#{ patientBean.patient.address.zipCode}"/></p:inplace>
+                <p:message for="zipCode" id="zipCodeError" style="color: red"/>
+                <p:commandButton value="Save Changes" action="#{editPatientBean.updatePatient()}"/>
+                <p:commandButton value="Cancel" immediate="true"/>
+
+                <h:messages style="color:red" />
+            </h:panelGrid>
+        </h:form>
+
+
+    </h:body>
+</html>
+
+

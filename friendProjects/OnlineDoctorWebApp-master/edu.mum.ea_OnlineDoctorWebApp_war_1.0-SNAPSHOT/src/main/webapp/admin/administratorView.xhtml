@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Admin View</title>
+    </h:head>
+    <h:body>        
+        //content begins here
+        <ui:define name="content"> 
+                <h:form class="inputForm">
+                    <h1></h1>
+                    <h:panelGrid columns="2">                        
+                        <h3>Gender: </h3><p:outputLabel  value="" class="form-control" />
+                        First Name: <p:outputLabel  value="#{AdminBean.patient.firstName}" class="form-control" />
+                        Last Name: <p:outputLabel  value="#{AdminBean.patient.lastName}" class="form-control" />
+                        Date of birth: <p:outputLabel  value="#{AdminBean.patient.dateofBirth}"  class="form-control"/>                 
+                        Cell Phone No <p:outputLabel  value="#{AdminBean.patient.cellPhoneNo}" class="form-control" />
+                        Home Phone No <p:outputLabel value="#{AdminBean.patient.homePhoneNo}" class="form-control" />
+                        Work Phone No <p:outputLabel value="#{AdminBean.patient.workPhoneNo}" class="form-control" />                            
+                        Street Address <p:outputLabel value="#{AdminBean.patient.address.streetAddress}" class="form-control" />
+                        City <p:outputLabel value="#{AdminBean.patient.address.city}" class="form-control" />                
+                        State: <p:outputLabel value="#{AdminBean.patient.address.state}" class="form-control" />
+                        <p:commandButton style="margin-left: 80px" class="btn-primary" value="Close" action=""/>
+                       </h:panelGrid>                        
+                </h:form>
+            </ui:define>
+        
+        //content ends here
+    </h:body>
+</html>
+
