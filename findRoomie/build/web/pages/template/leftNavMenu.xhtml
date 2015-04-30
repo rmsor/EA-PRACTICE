@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+    <div class="panel-heading">
+        Welcome:<i> #{loginController.displayName()}</i>
+    </div>
+    <style type="text/css">
+        .dash li{
+            list-style-type: none;
+            margin:15px;
+            display:inherit;
+            float:left;
+        }
+        .link_men{background:#d5d5c6;margin:3px;margin-top:10px;border: 1px solid #999999}
+        .dash li a {font-size:16px;}
+    </style>
+    <h:form>
+        <div class="panel-body">
+            <ul class="nav">
+
+                <li>
+                    <h:link class="link_men" value="Dashboard"
+                            outcome="/pages/user/dashboard.xhtml" />
+                </li>
+                <li>
+                    <h:link class="link_men" value="Search Rooms"
+                            outcome="/pages/user/searchRooms.xhtml" />
+                </li>
+                <li>
+                    <h:commandLink class="link_men" value="My Profile"
+                                   action="#{signupController.editProfile}" />
+                </li>
+
+                <li>
+                    <h:commandLink class="link_men" value="Manage My Rooms"
+                                   action="#{postController.showPosts()}" />
+                </li>
+
+                <li>
+                    <h:link class="link_men" outcome="/pages/user/addNewPost.xhtml" 
+                            value="Post New Room" />
+                </li>
+
+                <li>
+                    <h:commandLink class="link_men" value="Logout"
+                                   action="#{loginController.logout}" />
+                </li>
+
+
+            </ul>
+
+        </div>
+    </h:form>
+</ui:composition>

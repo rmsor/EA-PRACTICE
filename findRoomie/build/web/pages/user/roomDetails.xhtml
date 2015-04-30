@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:metadata>
+        <f:event listener="#{postController.preRenderView(request.getParameter('postId'))}"
+                 type="preRenderView" />
+    </f:metadata>
+
+    <h:body>
+        <ui:composition template="/pages/template/main_layout.xhtml">
+            <ui:define name="content">
+
+                <div class="row">
+
+                    <div class="col-sm-3">
+                        <div class="sidebar-account">		
+                            <div class="row ">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <ui:include src="../template/leftNavMenu.xhtml" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>       
+                    </div>
+
+                    <div class="col-sm-9">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Details</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <h1>#{postController.getPost().title}</h1>
+                                    <hr/>
+                                    <div class="col-lg-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><h3 class="headt">Room Details</h3></div>
+                                            <div class="panel-body">
+                                                <table class="table table-bordered table-striped">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td ><strong class="head">Number of Rooms</strong></td>
+                                                            <td>#{postController.getPost().totalRooms}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td ><strong class="head">Current Holders</strong></td>
+                                                            <td>#{postController.getPost().currentHolders}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Address</strong>
+                                                            </td>
+                                                            <td>
+                                                                #{postController.getPost().addressStreet}, #{postController.getPost().addressCity}, #{postController.getPost().addressState}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Description</strong>
+                                                            </td>
+                                                            <td>
+                                                                #{postController.getPost().roomDescription}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Photos</strong>
+                                                            </td>
+                                                            <td>
+                                                                <img  alt="asfd" title="ass" height="120" width="120" src="assets/images/no_preview.jpg"/>                                                          
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><h3 class="headt">Other Details</h3></div>
+                                            <div class="panel-body">
+                                                <table class="table table-bordered table-striped">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Expected Number</strong>
+                                                            </td>
+                                                            <td style="font-weight: bold">
+                                                                #{postController.getPost().expectedRoomieNumber}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Monthly Price</strong>
+                                                            </td>
+                                                            <td>
+                                                                #{postController.getPost().pricePerMonth}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Preferred Age Group</strong>
+                                                            </td>
+                                                            <td>
+                                                                #{postController.getPost().minimumAge} - #{postController.getPost().maximumAge}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Preferred Nationality</strong>
+                                                            </td>
+                                                            <td >
+                                                                #{postController.getPost().requiredCountry}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Preferred Gender</strong>
+                                                            </td>
+                                                            <td >
+                                                                #{postController.getPost().requiredGender}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Other Description</strong>
+                                                            </td>
+                                                            <td >
+                                                                #{postController.getPost().roomDescription}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head">Posted By</strong>
+                                                            </td>
+                                                            <td >
+                                                                #{postController.getPost().postedBy.firstName}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head"> Email:</strong>
+                                                            </td>
+                                                            <td >
+                                                               #{postController.getPost().postedBy.email}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong class="head"> Phone:</strong>
+                                                            </td>
+                                                            <td >
+                                                               #{postController.getPost().postedBy.phoneNumber}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="panel panel-default">
+                                        <!-- Default panel contents -->
+                                        <div class="panel-heading">Recent Comments</div>
+                                        <div class="panel-body">
+                                            <f:view>
+                                                <h:form>
+                                                    <h:dataTable value="#{postController.allComments}" class="table" var="post">
+                                                        <h:column>
+                                                            <h:outputText value="#{post.description}"/>
+                                                        </h:column>
+                                                        <h:column >
+                                                            <span style="float:right">By :&nbsp;<h:outputText  value="#{post.userid.firstName}"/></span>
+                                                        </h:column>
+                                                    </h:dataTable>
+                                                </h:form>
+                                            </f:view>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h:form  class="form-vertical" id="commentForm">
+                                        <fieldset>
+                                            <div class="well">
+                                                <div>
+                                                    <h:messages id="errMsg" style="color:red"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:outputLabel value="Post Your Comment Here"/>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h:inputText style="width:600px" value="#{commentController.selected.description}" required="true" p:placeholder="Description"   class="form-control " requiredMessage="Description is Required"></h:inputText>
+                                                            <input type="hidden" name="postid" value="#{postController.getPost().getId()}" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                </div>	
+                                                <h:commandButton action="#{commentController.saveComment()}" value="save" class="btn btn-primary">
+                                                </h:commandButton>
+                                            </div>
+
+
+                                        </fieldset>
+
+
+
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>

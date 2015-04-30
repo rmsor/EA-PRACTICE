@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" >
+    <h:head></h:head>
+    <h:body>
+        <ui:composition template="/pages/template/main_layout.xhtml">
+            <ui:define name="content">
+                <div class="col-xs-12 col-md-5 ">
+                    <ui:include src="pages/template/searchGuest.xhtml" />
+                </div>
+                <div class="col-sm-10 col-md-7 pull-right">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Search Results</div>
+                        <div class="panel-body">
+                            <div class="clear listings">
+                                <ui:repeat value="#{flash.results}" var="post">
+                                    <div class="row  listing-row">
+                                        <div class="col-sm-3">
+                                            <a title="test" href="#" class="thumbnail ">
+                                                <h:graphicImage height="220" width="276" value="/faces/resources/images/no_preview.jpg" title="#{post.title}" alt="#{post.title}"/>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <h3>
+                                                #{post.title}
+                                            </h3>
+                                            <span style="font-size: 12px;">Monthly Price: $ #{post.pricePerMonth}</span>
+                                            <p class="muted">No of Roommates Expected:  <strong>#{post.expectedRoomieNumber}</strong></p>
+                                            <p>Age Group: #{post.minimumAge} to #{post.maximumAge}</p>
+                                            <p>Area: #{post.addressStreet}, #{post.addressCity}, #{post.addressState}</p>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+

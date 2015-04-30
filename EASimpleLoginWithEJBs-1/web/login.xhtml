@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      <ui:composition template="./template.xhtml">
+        <ui:define name="top">
+            <h2>User Login</h2>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <p:messages/>
+                <p:panel  >
+                        <h:outputLabel for="emailAddr" value="Email Address" 
+                                       styleClass="requiredLbl"/>
+                        <h:inputText id="emailAddr" label="Email Address" 
+                                     value="#{loginView.emailAddr}" 
+                                     required="true"/>
+                        <h:outputLabel for="password" value="Password" 
+                                       styleClass="requiredLbl"/>
+                        <h:inputText id="password" label="Password" 
+                                     value="#{loginView.password}" 
+                                     required="true"/>
+                        
+                        <h:panelGroup/>
+                        <p:commandButton 
+                            value="Submit" 
+                            action ="#{loginView.loginUser}" 
+                            ajax="false"/>
+                </p:panel>
+            </h:form>
+        </ui:define> 
+    </ui:composition>
+</html>
+

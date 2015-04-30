@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="./template.xhtml">
+        <ui:define name="top">
+            <h2>
+                <span style="font-size: 14pt;">
+                    Maharishi University of Management</span><br/>
+                <span style="font-size: 8pt;">
+                    Fairfield, Iowa, USA</span><br/>
+                <span style="font-size: 14pt; font-family: 'Arial Narrow';">
+                    CS544 - Enterprise Architecture</span><br/>
+                
+            </h2>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <p:messages/>
+                <p:panel header="CS544 EA Lab 7 - User Registration and Login With Session EJBs">
+                    <h:panelGrid columns="1">
+                        <p:commandButton 
+                            value="Login - Already have a login and password  " 
+                            action ="login" 
+                            ajax="false"/>
+                        <p:commandButton 
+                            value="Register - To create a login and password  " 
+                            action ="newRegister" 
+                            ajax="false"/>
+                        
+                        <h:panelGroup/>
+                        
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </ui:define> 
+    </ui:composition>
+    
+</html>
+
+

@@ -1,0 +1,31 @@
+/* 
+    Document   : custom
+    Created on : Jan 4, 2012, 2:17:07 PM
+    Author     : Admin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.requiredLbl{
+    background-image:url(../resources/images/required-field.png);
+    background-position:top right;
+    background-repeat:no-repeat;
+    padding-right:10px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+}
+
+.optionalLbl{
+    padding-right:10px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+}
+
+

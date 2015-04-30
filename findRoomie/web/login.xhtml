@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" >
+    <h:head></h:head>
+    <h:body>
+        <ui:composition template="/pages/template/main_layout.xhtml">
+            <ui:define name="content">
+                <div class="col-xs-12 col-md-5 ">
+                   <ui:include src="pages/template/searchGuest.xhtml" />
+                                                </div>
+                <div class="col-sm-10 col-md-7 pull-right">
+                    <div  id="modalLogin">
+                        <div class="modal-dialog modal-md" style="width:90%">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Sign in to your account</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>If you have an account with us, please enter your details below.</p>
+                                    <p id="errMsg" style="margin:3px;color:red"></p>
+
+                                    <form method='post' action='j_security_check'>
+                                        <h:messages layout='table' errorStyle='background: #AFEEEE;'
+                                                    infoStyle='background: #AFEEEE;' globalOnly='true' />
+                                        <h:panelGrid columns='2'>
+                                            <h:outputLabel value='Username ' />
+                                            <input type='text' class='form-control' style='margin-left:5px' id='j_username' name='j_username' />
+                                            <br/>
+                                            <h:outputLabel value='Password ' />
+                                            <input type='password' class='form-control' style='margin-left:5px' id='j_password' name='j_password' />
+                                            <br/>
+                                            <h:outputText value='' />
+                                            <h:panelGrid columns='1'>
+                                                <input type='submit' class="btn btn-primary pull-right"  name='submit' value='Login' />
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                        <br />
+                                    </form>
+
+                                    <h:form>
+                                        <h:commandLink value="Forgot Password" style="color:green" action="#{emailController.forgotPassword}" />
+                                    </h:form>
+
+                                </div>
+
+                                <div class="modal-footer" style="text-align: center">
+                                    <div class="error-message">
+                                        <p style="color: #000; font-weight: normal;">
+                                            Don't have an account? | 
+                                            <h:link  outcome="/faces/signup.xhtml" style="color:green" value="Register Now" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>

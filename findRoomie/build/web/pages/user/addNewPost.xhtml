@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" >
+    <h:head></h:head>
+    <h:body>
+        <ui:composition template="/pages/template/main_layout.xhtml">
+            <ui:define name="content">          
+
+                <div class="container">
+                    <br/>
+                    <div class="row">
+
+                        <div class="col-sm-3">
+                            <div class="sidebar-account">		
+                                <div class="row ">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <ui:include src="../template/leftNavMenu.xhtml"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>       
+                        </div>
+
+                        <div class="col-sm-9">
+                            <h:form class="form-vertical" enctype="multipart/form-data">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Room Description</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <label>Title </label>
+                                                    <h:inputText style="width:100px;" required="true" class="form-control" value="#{postController.post.title}"/>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <label>Total Rooms </label>
+                                                    <h:inputText style="width:100px;" required="true" class="form-control" value="#{postController.post.totalRooms}"/>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>Current Holders </label>
+                                                    <h:inputText required="true" class="form-control" style="width:100px;" value="#{postController.post.currentHolders}" />
+                                                    <!--<input value="" name="site_url" required="required" type="url" class="form-control "/>-->
+                                                </div><br/><br/><br/><br/><br/><br/><br/><br/>
+                                                <div class="panel panel-default col-sm-12" >
+                                                    <label>Address</label><br/><br/>
+                                                    <label>Street</label>
+                                                    <h:inputText  required="true" class="form-control" value="#{postController.post.addressStreet}"/>
+                                                    <label>City</label>
+                                                    <h:inputText  required="true" class="form-control" value="#{postController.post.addressCity}"/>
+                                                    <label>State</label>
+                                                    <h:inputText  required="true" class="form-control" value="#{postController.post.addressState}"/>
+                                                    <!--<input value="" name="address" type="text" class="form-control "/>-->
+                                                    <br/></div><br/><br/><br/><br/><br/>
+                                                <div class="col-sm-12"><br/>
+                                                    <label>Description </label>
+                                                    <h:inputTextarea required="true" class="form-control col-sm-8 expand" style="width: 99%" rows="6" value="#{postController.post.roomDescription}"/>
+                                                    <!--<textarea style="width: 99%" name="long_description" rows="6" class="form-control col-sm-8 expand"></textarea>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>			
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Roomie Description (Your Specifications)</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <label>Expected Number </label>
+                                                    <h:inputText style="width:100px;" required="true" class="form-control" value="#{postController.post.expectedRoomieNumber}"/>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>Price/Month ($)</label>
+                                                    <h:inputText required="true" class="form-control" style="width:200px;" value="#{postController.post.pricePerMonth}" />
+                                                    <!--<input value="" name="site_url" required="required" type="url" class="form-control "/>-->
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label>Age Range</label>
+                                                    <div class="col-sm-3">
+                                                        <h:inputText required="true" class="form-control" style="width:100px;" value="#{postController.post.minimumAge}" />
+                                                    </div><div class="col-sm-3">
+                                                        <h:inputText required="true" class="form-control" style="width:100px;" value="#{postController.post.maximumAge}" />
+                                                        <!--<input value="" name="site_url" required="required" type="url" class="form-control "/>-->
+                                                    </div></div>
+                                                <div class="col-sm-12">
+                                                    <label>Country</label>
+                                                    <h:inputText required="true" class="form-control" style="width:200px;" value="#{postController.post.requiredCountry}" />
+                                                    <!--<input value="" name="site_url" required="required" type="url" class="form-control "/>-->
+                                                </div>
+                                                <!-- Required gender to be made as combobox with male, female or any -->
+                                                <div class="col-sm-12">
+                                                    <label>Gender</label>
+                                                    <h:selectOneMenu value="#{postController.post.requiredGender}">
+                                                        <f:selectItem itemValue="male" itemLabel="Male" />
+                                                        <f:selectItem itemValue="female" itemLabel="Female" />
+                                                        <f:selectItem itemValue="any" itemLabel="Any" />
+                                                    </h:selectOneMenu>
+                                                    <!--<h:inputText required="true" class="form-control" style="width:100px;" value="#{postController.post.requiredGender}" />-->
+                                                    <!--<input value="" name="site_url" required="required" type="url" class="form-control "/>-->
+                                                </div>
+                                                <div class="col-sm-12"><br/>
+                                                    <label>Description </label>
+                                                    <h:inputTextarea required="true" class="form-control col-sm-8 expand" style="width: 99%" rows="6" value="#{postController.post.rommieQualities}"/>
+                                                    <!--<textarea style="width: 99%" name="long_description" rows="6" class="form-control col-sm-8 expand"></textarea>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>			
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Add photo</div>
+                                    <div class="panel-body">
+                                        <div class="col-sm-11">
+                                            <div class="row" style="margin-left:10px;background:#E7F1FD;padding:10px;">
+                                                <div class="doc-data">
+                                                    <div class="doc-data-wrapper">
+                                                        
+                                                        
+                                                        <h:inputFile id="file"  value="#{postController.file1}" 
+                                                                     required="true"  requiredMessage="Profile pic is required"
+                                                                     validator="#{postController.validateFile}" >
+
+
+                                                        </h:inputFile>
+
+                                                    </div>
+                                                    <div style="margin-top:10px;" id="max-upload-size">Maximum Filesize: 3 MB</div>
+                                                        
+                                                </div>
+                                                <div class="clear" style="clear:both;"></div>
+                                                <strong><div style="display: none;" id="error_doc_data" class="subCont"><label for="doc_data"></label></div></strong>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" required="required" value="Y"/> I agree to the terms and conditions and regulations.
+                                            </label>
+                                        </div>
+
+                                        <br/>
+                                        <h:commandButton class="btn btn-primary pull-right" action="#{postController.postThisPost()}" value="Post My Room"/>
+                                        <!--<button class="btn btn-primary pull-right" type="submit" value="submit" name="submit"><i class="icon-ok"></i>Publish Post</button>-->
+
+                                    </div>
+                                </div>
+
+                            </h:form></div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:body>
+        <ui:composition template="/CHECKREPEATER.xhtml">
+
+
+            <ui:define name="divmain">
+                <h:form>
+
+                    <p:commandButton id="showDialogButton" value="Destroy the World" onclick="confirmation.show()" type="button"/>  
+
+                    <p:confirmDialog id="confirmDialog" message="Shipment Declaration Doesnt Exist Do You Want to Create new"  
+                                     header="Confirm" severity="alert" widgetVar="confirmation">  
+
+                        <p:commandButton id="confirm" value="Yes Sure"  oncomplete="confirmation.hide()"  
+                                         />  
+                        <p:commandButton id="decline" value="Not Yet" onclick="confirmation.hide()" type="button" />   
+
+
+
+                    </p:confirmDialog>  
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

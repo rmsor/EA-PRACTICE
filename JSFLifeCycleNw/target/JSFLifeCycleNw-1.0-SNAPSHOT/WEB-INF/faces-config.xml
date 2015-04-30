@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <lifecycle>
+        <phase-listener>LifeCycleListener</phase-listener>
+    </lifecycle>
+
+    <converter>
+        <converter-id>myConverter</converter-id>
+        <converter-class>MyConverter</converter-class>
+    </converter>
+    
+    <validator>
+        <validator-id>myValidator</validator-id>
+        <validator-class>MyValidator</validator-class>
+    </validator>
+    
+    <managed-bean>
+        <managed-bean-name>myBean</managed-bean-name>
+        <managed-bean-class>MyBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+</faces-config>

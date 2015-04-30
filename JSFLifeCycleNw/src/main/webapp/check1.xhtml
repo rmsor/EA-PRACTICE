@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <ui:repeat value="#{myBean.strCol}"  var="abc">
+                #{abc}
+
+                <tr>
+                    <h:panelGroup>
+                        <td rowspan="#{myBean.rowSpanSize}">
+                            <p:selectOneMenu value="#{myBean.inputValue}" valueChangeListener="#{myBean.inputChanged}" >
+                                <p:ajax  update="projects"/>
+                                <f:selectItems value="#{myBean.strCol4}" />
+
+                            </p:selectOneMenu>
+                        </td>
+                    </h:panelGroup>
+                </tr>
+
+
+                <!--The <ui:repeat> itself does not generate any HTML to the output.
+                    The <p:ajax update> expects an ID which is present in the HTML DOM tree. 
+                        Put it in a <h:panelGroup> with an id and reference it instead-->
+
+                <h:panelGroup id="projects">
+                    <ui:repeat  value="#{myBean.strCol3}"  var="bc">
+                        #{bc}
+
+                        <p:selectOneMenu value="#{myBean.inpValue}"  >
+                            <f:selectItems value="#{myBean.strCol2}" />
+
+                        </p:selectOneMenu>
+
+                        <br />
+                    </ui:repeat>
+                </h:panelGroup>
+
+
+            </ui:repeat>
+        </h:form>
+
+    </h:body>
+</html>
+<!--  no neded to write key uu event event="keyup" when using update @ form all life cycle execute  but it itself doent 
+ ant event must be execute such as minimizing clicking outside should occur to go to life cycle-->
+
